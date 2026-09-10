@@ -270,6 +270,11 @@
             background: #141b38;
         }
 
+        .playlist-count-input {
+            width: 112px;
+            min-width: 112px;
+        }
+
         /* =========================================================
            PLAYLIST
         ========================================================= */
@@ -879,6 +884,16 @@
                         <option value="커버곡">커버곡 263곡</option>
                         <option value="오리지널곡">오리지널곡 28곡</option>
                     </select>
+                    <input
+                        class="playlist-count-input"
+                        id="playlistCount"
+                        type="number"
+                        min="1"
+                        max="291"
+                        value="6"
+                        inputmode="numeric"
+                        aria-label="추천 곡 수"
+                        title="추천할 곡 수">
                     <button class="button button-primary" id="makePlaylist">플레이리스트 만들기</button>
                     <button class="button" id="playCovers">커버 전체 재생</button>
                     <button class="button" id="playOriginals">오리지널 전체 재생</button>
@@ -1507,7 +1522,24 @@
         $("#makePlaylist").addEventListener("click", () => {
             const type = $("#songKind").value;
             const candidates = songs.filter((song) => type === "all" || song.type === type);
-            renderPlaylist(randomPick(candidates, 6));
+            const input = $("#playlistCount");
+            const requestedCount = Number(input.value) || 6;
+            const count = Math.max(1, Math.min(candidates.length, Math.floor(requestedCount)));
+
+            input.value = String(count);
+            input.max = String(candidates.length);
+            renderPlaylist(randomPick(candidates, count));
+        });
+
+        $("#songKind").addEventListener("change", () => {
+            const type = $("#songKind").value;
+            const maximum = type === "all" ? songs.length : songs.filter((song) => song.type === type).length;
+            const input = $("#playlistCount");
+
+            input.max = String(maximum);
+            if (Number(input.value) > maximum) {
+                input.value = String(maximum);
+            }
         });
 
         $("#playCovers").addEventListener("click", () => {
