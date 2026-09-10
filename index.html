@@ -444,6 +444,14 @@
             margin: 12px 0;
         }
 
+        .roulette-actions {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+
         /* =========================================================
            COMPATIBILITY TEST
         ========================================================= */
@@ -1159,6 +1167,42 @@
             { axes: [79, 63, 81, 80, 84], tags: ["에너지", "친화력", "도전"], reason: "활기차게 함께 즐기면서 새로운 것을 시도하는 궁합이에요.", songTitle: "Berry Verry Strawberry", songId: "nsZmnwC9ukE" }
         ];
 
+
+        /*
+         * 룰렛의 "최신 영상"은 고정된 URL이 아니라 각 채널의 Videos 탭을 엽니다.
+         * 따라서 언제 사용해도 해당 멤버의 최신 업로드를 확인할 수 있습니다.
+         */
+        const memberVideoPages = [
+            "https://www.youtube.com/@ayatsunoyuni/videos",
+            "https://www.youtube.com/@Sakihanechannel/videos",
+            "https://www.youtube.com/@neneko_mashiro/videos",
+            "https://www.youtube.com/@akanelize/videos",
+            "https://www.youtube.com/@shirayukihina/videos",
+            "https://www.youtube.com/@arahashitabi/videos",
+            "https://www.youtube.com/@hanako_nana/videos",
+            "https://www.youtube.com/@yuzuhariko/videos",
+            "https://www.youtube.com/@aokumorin/videos",
+            "https://www.youtube.com/@tenkoshibuki/videos"
+        ];
+
+        /*
+         * 대표곡은 해당 멤버가 부른 것으로 확인된 영상만 고정 연결합니다.
+         * 후야는 고정 ID 대신, 검증된 커버 데이터에서 자동으로 골라
+         * 다른 멤버의 곡이 섞이지 않도록 처리합니다.
+         */
+        const featuredSongs = [
+            { title: "SUPADOPA", videoId: "R_RAWjqdgTs" },
+            null,
+            { title: "봄꿈", videoId: "_8uoathMY0A" },
+            { title: "Festa!", videoId: "3_0Ut2tlxLM" },
+            { title: "하나(夏拏)", videoId: "rQaluJS-Tc0" },
+            { title: "여로", videoId: "G5tTozKJRD4" },
+            { title: "Hush Trap", videoId: "jvZRK7W7S9Y" },
+            { title: "악당주의보", videoId: "P_oxx3_VpIY" },
+            { title: "Maid My Way", videoId: "ZYSQLv_L26Y" },
+            { title: "Berry Verry Strawberry", videoId: "nsZmnwC9ukE" }
+        ];
+
         /* =========================================================
            APP STATE & SHARED HELPERS
         ========================================================= */
@@ -1184,6 +1228,32 @@
             }
 
             return result;
+        }
+
+
+        function getMemberRecommendation(memberIndex) {
+            const featured = featuredSongs[memberIndex];
+
+            if (featured) {
+                const verifiedSong = songs.find((song) => song.id === featured.videoId);
+
+                if (verifiedSong && verifiedSong.memberIndex === memberIndex) {
+                    return featured;
+                }
+            }
+
+            const memberCover = songs.find((song) => {
+                return song.type === "커버곡" && song.memberIndex === memberIndex;
+            });
+
+            return {
+                title: members[memberIndex] + "의 커버곡",
+                videoId: memberCover ? memberCover.id : songs[0].id
+            };
+        }
+
+        function openMemberLatestVideos(memberIndex) {
+            window.open(memberVideoPages[memberIndex], "_blank", "noopener");
         }
 
         function openVideo(videoId) {
@@ -1417,17 +1487,36 @@
             $("#wheel").style.transform = "rotate(" + wheelRotation + "deg)";
 
             window.setTimeout(() => {
+                const recommendation = getMemberRecommendation(winnerIndex);
+
                 state.favoriteMemberIndex = winnerIndex;
+                state.rouletteRecommendation = {
+                    memberIndex: winnerIndex,
+                    title: recommendation.title,
+                    videoId: recommendation.videoId
+                };
                 saveState();
 
                 $("#rouletteResult").innerHTML = `
                     <h3>🎉 ${members[winnerIndex]}</h3>
                     <div class="member-line">
                         <img class="member-avatar" src="${memberAvatars[winnerIndex]}" alt="${members[winnerIndex]}">
-                        <p class="muted">포인터가 가리킨 섹터의 멤버입니다.<br>팬 카드에 최애로 저장했어요.</p>
+                        <p class="muted">포인터가 가리킨 섹터의 멤버입니다.<br>이 멤버의 최신 영상과 커버곡도 바로 확인할 수 있어요.</p>
                     </div>
-                    <button class="button button-primary" id="spinAgain">다시 돌리기</button>
+                    <div class="roulette-actions">
+                        <button class="button" id="openLatestVideo">📺 최신 영상 보기</button>
+                        <button class="button button-primary" id="openMemberCover">🎵 ${recommendation.title} 듣기</button>
+                    </div>
+                    <button class="button" id="spinAgain">다시 돌리기</button>
                 `;
+
+                $("#openLatestVideo").addEventListener("click", () => {
+                    openMemberLatestVideos(winnerIndex);
+                });
+
+                $("#openMemberCover").addEventListener("click", () => {
+                    openVideo(recommendation.videoId);
+                });
 
                 $("#spinAgain").addEventListener("click", spinWheel);
             }, 4700);
@@ -1513,6 +1602,7 @@
         function renderAnalysis() {
             const { axes, bestMemberIndex, score } = calculateCompatibility();
             const profile = memberProfiles[bestMemberIndex];
+            const recommendation = getMemberRecommendation(bestMemberIndex);
             const tags = [...topAxisTags(axes), ...profile.tags];
             const container = $("#analysisResult");
 
@@ -1520,8 +1610,8 @@
                 memberIndex: bestMemberIndex,
                 score,
                 axes,
-                songTitle: profile.songTitle,
-                songId: profile.songId
+                songTitle: recommendation.title,
+                songId: recommendation.videoId
             };
             saveState();
 
@@ -1556,7 +1646,7 @@
                     <img id="recommendedThumbnail" alt="추천곡 썸네일">
                     <div>
                         <p class="eyebrow">RECOMMENDED SONG</p>
-                        <h3>🎵 ${profile.songTitle}</h3>
+                        <h3>🎵 ${recommendation.title}</h3>
                         <p class="muted">${members[bestMemberIndex]}와의 궁합을 바탕으로 고른 실제 YouTube 영상이에요.</p>
                         <button class="button button-primary" id="playRecommended">▶ 노래 듣기</button>
                     </div>
@@ -1587,13 +1677,13 @@
 
             const thumbnail = $("#recommendedThumbnail");
             const fallback = memberAvatars[bestMemberIndex];
-            thumbnail.src = "https://i.ytimg.com/vi/" + profile.songId + "/hqdefault.jpg";
+            thumbnail.src = "https://i.ytimg.com/vi/" + recommendation.videoId + "/hqdefault.jpg";
             thumbnail.onerror = () => {
                 thumbnail.onerror = null;
                 thumbnail.src = fallback;
             };
 
-            $("#playRecommended").addEventListener("click", () => openVideo(profile.songId));
+            $("#playRecommended").addEventListener("click", () => openVideo(recommendation.videoId));
             $("#restartQuiz").addEventListener("click", restartQuiz);
             renderFanCard();
         }
