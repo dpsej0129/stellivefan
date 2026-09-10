@@ -661,6 +661,104 @@
             border-bottom: 0;
         }
 
+        .fan-card-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .fan-card-editor {
+            max-width: 540px;
+            margin: 16px auto 0;
+            padding: 22px;
+        }
+
+        .fan-card-editor h3 {
+            margin: 0 0 6px;
+        }
+
+        .editor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .editor-field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .editor-field.is-wide {
+            grid-column: 1 / -1;
+        }
+
+        .editor-field label {
+            color: var(--sub);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 11px 12px;
+            color: var(--text);
+            border: 1px solid rgba(149, 135, 255, 0.45);
+            border-radius: 12px;
+            outline: none;
+            background: #141b38;
+            color-scheme: dark;
+        }
+
+        textarea {
+            min-height: 92px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(104, 207, 255, 0.16);
+        }
+
+        .locked-field {
+            grid-column: 1 / -1;
+            padding: 13px;
+            color: #d7d3ea;
+            border: 1px solid rgba(255, 210, 122, 0.34);
+            border-radius: 12px;
+            background: rgba(255, 210, 122, 0.08);
+        }
+
+        .locked-field strong {
+            color: var(--warning);
+        }
+
+        .badge-list {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .fan-badge {
+            padding: 5px 8px;
+            color: #dcd6ff;
+            border: 1px solid rgba(149, 135, 255, 0.3);
+            border-radius: 999px;
+            background: rgba(149, 135, 255, 0.13);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        @media (max-width: 520px) {
+            .editor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* =========================================================
            RESPONSIVE
         ========================================================= */
@@ -855,16 +953,73 @@
         </section>
 
         <section class="page" id="fan">
-            <div class="fan-card">
+            <div class="fan-card" id="fanCard">
                 <p class="eyebrow">STELLIVE FAN CARD</p>
-                <h2>FAN #STEL</h2>
+                <h2 id="fanName">FAN #STEL</h2>
+                <p class="muted" id="fanIntro">나만의 스텔라이브 팬 프로필</p>
+
                 <div class="fan-card-row"><span>💜 최애</span><strong id="fanFavorite">아직 선택 안 함</strong></div>
                 <div class="fan-card-row"><span>🎵 최애곡</span><strong id="fanSong">아직 선택 안 함</strong></div>
                 <div class="fan-card-row"><span>✨ 오늘의 멤버</span><strong id="fanToday">-</strong></div>
-                <div class="fan-card-row"><span>💫 궁합 멤버</span><strong id="fanMatch">궁합 테스트를 해 보세요</strong></div>
-                <div class="fan-card-row"><span>📊 궁합 점수</span><strong id="fanScore">-</strong></div>
+                <div class="fan-card-row"><span>🎮 좋아하는 콘텐츠</span><strong id="fanContent">아직 선택 안 함</strong></div>
+                <div class="fan-card-row"><span>💫 궁합 멤버 🔒</span><strong id="fanMatch">궁합 테스트를 해 보세요</strong></div>
+                <div class="fan-card-row"><span>📊 궁합 점수 🔒</span><strong id="fanScore">-</strong></div>
+                <div class="fan-card-row"><span>🏅 활동 배지</span><span class="badge-list" id="fanBadges"></span></div>
                 <div class="fan-card-row"><span>🎧 데이터</span><strong>실제 영상 291곡</strong></div>
+
+                <div class="fan-card-actions">
+                    <button class="button button-primary" id="editFanCard">✏️ 카드 수정</button>
+                    <button class="button" id="shareFanCard">📤 카드 공유</button>
+                </div>
             </div>
+
+            <form class="card fan-card-editor" id="fanCardEditor" hidden>
+                <h3>내 FAN CARD 수정</h3>
+                <p class="muted">궁합 멤버와 점수는 테스트 결과이므로 수정할 수 없습니다.</p>
+
+                <div class="editor-grid">
+                    <div class="editor-field">
+                        <label for="fanNameInput">닉네임</label>
+                        <input id="fanNameInput" maxlength="24" placeholder="예: STEL FAN">
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="fanFavoriteSelect">최애 멤버</label>
+                        <select id="fanFavoriteSelect"></select>
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="fanTodaySelect">오늘의 멤버</label>
+                        <select id="fanTodaySelect"></select>
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="fanSongInput">최애곡</label>
+                        <input id="fanSongInput" maxlength="60" placeholder="예: SUPADOPA">
+                    </div>
+
+                    <div class="editor-field is-wide">
+                        <label for="fanContentInput">좋아하는 콘텐츠</label>
+                        <input id="fanContentInput" maxlength="80" placeholder="예: 노래 · 게임 · 합방">
+                    </div>
+
+                    <div class="editor-field is-wide">
+                        <label for="fanIntroInput">한 줄 소개</label>
+                        <textarea id="fanIntroInput" maxlength="160" placeholder="나만의 팬 소개를 적어 보세요."></textarea>
+                    </div>
+
+                    <div class="locked-field">
+                        🔒 궁합 멤버: <strong id="lockedMatch">궁합 테스트를 해 보세요</strong><br>
+                        <small>테스트 답변으로 계산되는 결과이므로 카드 편집에서 변경할 수 없습니다.</small>
+                    </div>
+                </div>
+
+                <div class="fan-card-actions">
+                    <button class="button button-primary" type="submit">저장하기</button>
+                    <button class="button" type="button" id="cancelFanEdit">취소</button>
+                    <button class="button" type="button" id="resetFanEdit">수정 항목 기본값으로</button>
+                </div>
+            </form>
         </section>
     </main>
 
@@ -1208,6 +1363,13 @@
         ========================================================= */
         const storageKey = "stellive-fan-space";
         const state = JSON.parse(localStorage.getItem(storageKey) || "{}");
+        state.card = state.card || {};
+        state.stats = state.stats || {
+            playlistSaves: 0,
+            rouletteSpins: 0,
+            completedTests: 0
+        };
+
         const $ = (selector) => document.querySelector(selector);
 
         let wheelRotation = 0;
@@ -1324,6 +1486,9 @@
             saveButton.addEventListener("click", () => {
                 state.favoriteSong = song;
                 state.favoriteMemberIndex = song.memberIndex;
+                state.card.favoriteSongName = song.title;
+                state.card.favoriteMemberIndex = song.memberIndex;
+                state.stats.playlistSaves += 1;
                 saveState();
                 renderFanCard();
                 alert("팬 카드에 추가했습니다.");
@@ -1490,6 +1655,8 @@
                 const recommendation = getMemberRecommendation(winnerIndex);
 
                 state.favoriteMemberIndex = winnerIndex;
+                state.card.favoriteMemberIndex = winnerIndex;
+                state.stats.rouletteSpins += 1;
                 state.rouletteRecommendation = {
                     memberIndex: winnerIndex,
                     title: recommendation.title,
@@ -1613,6 +1780,7 @@
                 songTitle: recommendation.title,
                 songId: recommendation.videoId
             };
+            state.stats.completedTests += 1;
             saveState();
 
             $("#quizCard").hidden = true;
@@ -1717,29 +1885,165 @@
         });
 
         /* =========================================================
-           FAN CARD
+           FAN CARD — editable personal fields, locked test result
         ========================================================= */
+        function getCardValue(key, fallback) {
+            const value = state.card[key];
+            return value === undefined || value === null || value === "" ? fallback : value;
+        }
+
+        function getFanBadges() {
+            const badges = [];
+
+            if (state.stats.playlistSaves > 0) badges.push("🎧 Playlist Maker");
+            if (state.stats.rouletteSpins >= 3) badges.push("🎡 Lucky Spinner");
+            if (state.stats.completedTests > 0) badges.push("💫 Analyzer");
+            if (state.stats.playlistSaves >= 5) badges.push("🌟 Music Explorer");
+
+            return badges.length ? badges : ["🌱 New Fan"];
+        }
+
+        function fillMemberSelect(select, selectedIndex, emptyLabel) {
+            select.innerHTML = "";
+
+            const empty = document.createElement("option");
+            empty.value = "";
+            empty.textContent = emptyLabel;
+            select.append(empty);
+
+            members.forEach((memberName, index) => {
+                const option = document.createElement("option");
+                option.value = String(index);
+                option.textContent = memberName;
+                option.selected = index === selectedIndex;
+                select.append(option);
+            });
+        }
+
+        function getDisplayedFanData() {
+            const autoTodayIndex = state.today ? state.today.memberIndex : undefined;
+
+            return {
+                name: getCardValue("name", "FAN #STEL"),
+                favoriteMemberIndex: getCardValue("favoriteMemberIndex", state.favoriteMemberIndex),
+                favoriteSongName: getCardValue("favoriteSongName", state.favoriteSong ? state.favoriteSong.title : ""),
+                todayMemberIndex: getCardValue("todayMemberIndex", autoTodayIndex),
+                favoriteContent: getCardValue("favoriteContent", ""),
+                intro: getCardValue("intro", "나만의 스텔라이브 팬 프로필")
+            };
+        }
+
         function renderFanCard() {
-            const favoriteIndex = state.favoriteMemberIndex;
-            const favoriteSong = state.favoriteSong;
-            const today = state.today;
+            const card = getDisplayedFanData();
             const compatibility = state.compatibility;
+            const badges = getFanBadges();
 
+            $("#fanName").textContent = card.name;
+            $("#fanIntro").textContent = card.intro;
             $("#fanFavorite").textContent =
-                favoriteIndex === undefined ? "아직 선택 안 함" : members[favoriteIndex];
-
-            $("#fanSong").textContent =
-                favoriteSong ? favoriteSong.title : "아직 선택 안 함";
-
+                card.favoriteMemberIndex === undefined ? "아직 선택 안 함" : members[card.favoriteMemberIndex];
+            $("#fanSong").textContent = card.favoriteSongName || "아직 선택 안 함";
             $("#fanToday").textContent =
-                today ? members[today.memberIndex] : "오늘의 추천 보기";
-
+                card.todayMemberIndex === undefined ? "오늘의 추천 보기" : members[card.todayMemberIndex];
+            $("#fanContent").textContent = card.favoriteContent || "아직 선택 안 함";
             $("#fanMatch").textContent =
                 compatibility ? members[compatibility.memberIndex] : "궁합 테스트를 해 보세요";
+            $("#fanScore").textContent = compatibility ? compatibility.score + "점" : "-";
 
-            $("#fanScore").textContent =
-                compatibility ? compatibility.score + "점" : "-";
+            const badgeList = $("#fanBadges");
+            badgeList.innerHTML = "";
+            badges.forEach((badge) => {
+                const element = document.createElement("span");
+                element.className = "fan-badge";
+                element.textContent = badge;
+                badgeList.append(element);
+            });
         }
+
+        function openFanCardEditor() {
+            const card = getDisplayedFanData();
+            const compatibility = state.compatibility;
+
+            $("#fanNameInput").value = card.name === "FAN #STEL" ? "" : card.name;
+            fillMemberSelect($("#fanFavoriteSelect"), card.favoriteMemberIndex, "자동 선택");
+            fillMemberSelect($("#fanTodaySelect"), card.todayMemberIndex, "오늘의 자동 추천 사용");
+            $("#fanSongInput").value = card.favoriteSongName;
+            $("#fanContentInput").value = card.favoriteContent;
+            $("#fanIntroInput").value =
+                card.intro === "나만의 스텔라이브 팬 프로필" ? "" : card.intro;
+            $("#lockedMatch").textContent =
+                compatibility ? members[compatibility.memberIndex] + " · " + compatibility.score + "점" : "궁합 테스트를 해 보세요";
+
+            $("#fanCardEditor").hidden = false;
+            $("#fanCardEditor").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function closeFanCardEditor() {
+            $("#fanCardEditor").hidden = true;
+        }
+
+        function saveFanCardEditor(event) {
+            event.preventDefault();
+
+            const favoriteValue = $("#fanFavoriteSelect").value;
+            const todayValue = $("#fanTodaySelect").value;
+
+            state.card = {
+                ...state.card,
+                name: $("#fanNameInput").value.trim(),
+                favoriteMemberIndex: favoriteValue === "" ? null : Number(favoriteValue),
+                favoriteSongName: $("#fanSongInput").value.trim(),
+                todayMemberIndex: todayValue === "" ? null : Number(todayValue),
+                favoriteContent: $("#fanContentInput").value.trim(),
+                intro: $("#fanIntroInput").value.trim()
+            };
+
+            saveState();
+            renderFanCard();
+            closeFanCardEditor();
+        }
+
+        function resetEditableFanCardFields() {
+            state.card = {};
+            saveState();
+            renderFanCard();
+            openFanCardEditor();
+        }
+
+        async function shareFanCard() {
+            const card = getDisplayedFanData();
+            const compatibility = state.compatibility;
+            const lines = [
+                "STELLIVE FAN CARD",
+                "닉네임: " + card.name,
+                "최애: " + (card.favoriteMemberIndex === undefined ? "미설정" : members[card.favoriteMemberIndex]),
+                "최애곡: " + (card.favoriteSongName || "미설정"),
+                "좋아하는 콘텐츠: " + (card.favoriteContent || "미설정"),
+                "궁합 멤버: " + (compatibility ? members[compatibility.memberIndex] : "테스트 전")
+            ];
+            const text = lines.join("\n");
+
+            try {
+                if (navigator.share) {
+                    await navigator.share({ title: "STELLIVE FAN CARD", text });
+                } else if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(text);
+                    alert("FAN CARD 정보를 클립보드에 복사했습니다.");
+                } else {
+                    alert(text);
+                }
+            } catch (error) {
+                if (error.name !== "AbortError") {
+                    alert("공유를 완료하지 못했습니다.");
+                }
+            }
+        }
+
+        $("#editFanCard").addEventListener("click", openFanCardEditor);
+        $("#cancelFanEdit").addEventListener("click", closeFanCardEditor);
+        $("#resetFanEdit").addEventListener("click", resetEditableFanCardFields);
+        $("#fanCardEditor").addEventListener("submit", saveFanCardEditor);
+        $("#shareFanCard").addEventListener("click", shareFanCard);
 
         /* =========================================================
            INITIAL RENDER
