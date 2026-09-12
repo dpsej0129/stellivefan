@@ -400,6 +400,132 @@
             font-weight: 900;
         }
 
+
+        /* =========================================================
+           RANDOM MEMBER RECOMMENDATION
+        ========================================================= */
+        .random-card {
+            overflow: hidden;
+            padding: 24px;
+        }
+
+        .random-toolbar {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .random-toolbar p {
+            max-width: 680px;
+            margin: 0;
+        }
+
+        .random-result {
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .random-result[hidden] {
+            display: none;
+        }
+
+        .random-member {
+            display: grid;
+            align-content: start;
+            justify-items: center;
+            min-height: 100%;
+            padding: 24px 18px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background:
+                radial-gradient(circle at 50% 22%, rgba(149, 135, 255, 0.28), transparent 44%),
+                #101733;
+            text-align: center;
+        }
+
+        .random-member img {
+            width: 112px;
+            height: 112px;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.34);
+        }
+
+        .random-member h3 {
+            margin: 16px 0 7px;
+            font-size: 24px;
+        }
+
+        .random-member p {
+            margin: 0 0 18px;
+            color: var(--sub);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .recommendation-media {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: #101733;
+        }
+
+        .recommendation-media img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #1d254a;
+        }
+
+        .recommendation-copy {
+            display: grid;
+            gap: 8px;
+            padding: 16px;
+        }
+
+        .recommendation-kind {
+            color: var(--blue);
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.7px;
+        }
+
+        .recommendation-copy h3 {
+            min-height: 2.8em;
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .recommendation-copy p {
+            margin: 0;
+            color: var(--sub);
+            font-size: 12px;
+        }
+
+        .recommendation-copy .button {
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .data-note {
+            margin: 14px 0 0;
+            color: var(--sub);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
         /* =========================================================
            QUICK PATH QUIZ
         ========================================================= */
@@ -521,6 +647,10 @@
             .music-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .random-result {
+                grid-template-columns: 190px 1fr;
+            }
         }
 
         @media (max-width: 620px) {
@@ -541,8 +671,19 @@
             .step-grid,
             .member-grid,
             .music-grid,
-            .quiz-options {
+            .quiz-options,
+            .random-result,
+            .recommendation-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .random-toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .random-toolbar .button {
+                width: 100%;
             }
 
             .member-card {
@@ -567,6 +708,7 @@
             <nav class="nav" aria-label="가이드 메뉴">
                 <a href="#start">시작하기</a>
                 <a href="#members">멤버 찾기</a>
+                <a href="#random">랜덤 추천</a>
                 <a href="#music">음악</a>
                 <a href="#quiz">입문 추천</a>
             </nav>
@@ -659,6 +801,40 @@
                     <p class="muted">짧은 질문에 답하면 지금의 취향에 맞는 출발점을 추천해 드려요.</p>
                     <a href="#quiz">입문 추천 받기 →</a>
                 </article>
+            </div>
+        </section>
+
+
+        <section class="container section" id="random">
+            <div class="section-heading">
+                <p class="kicker">RANDOM MEMBER PICK</p>
+                <h2>오늘 만날 멤버를 뽑아볼까요?</h2>
+                <p>멤버 한 명을 무작위로 뽑아 가장 많이 본 일반 영상과 노래, 공식 치지직 채널을 한 번에 추천해 드려요.</p>
+            </div>
+
+            <div class="card random-card">
+                <div class="random-toolbar">
+                    <p class="muted">같은 멤버가 바로 연속해서 나오지 않도록 뽑습니다. 마음에 들 때까지 다시 뽑아도 좋아요.</p>
+                    <button class="button button-primary" id="randomMemberButton" type="button">
+                        ✨ 랜덤 멤버 추천받기
+                    </button>
+                </div>
+
+                <div class="random-result" id="randomResult" aria-live="polite" hidden>
+                    <article class="random-member">
+                        <img id="randomMemberImage" alt="">
+                        <h3 id="randomMemberName"></h3>
+                        <p id="randomMemberDescription"></p>
+                        <a class="button" id="randomChzzkLink" target="_blank" rel="noopener">
+                            치지직 채널 열기
+                        </a>
+                    </article>
+
+                    <div>
+                        <div class="recommendation-grid" id="randomRecommendationGrid"></div>
+                        <p class="data-note" id="randomDataNote"></p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -765,6 +941,146 @@
                     "focus": "talk"
           }
 ];
+
+
+        /*
+         * 각 YouTube 채널의 '동영상 > 인기순'에서 음악/비음악 영상을
+         * 분리해 확인한 스냅샷입니다. 조회수는 시간이 지나며 달라질 수 있습니다.
+         */
+        const recommendationCheckedAt = "2026.09.12";
+
+        const memberRecommendations = [
+            {
+                chzzk: "https://chzzk.naver.com/45e71a76e949e16a34764deb962f9d9f",
+                song: {
+                    title: "내꺼 하는 법",
+                    videoId: "pkypi5nXSYM",
+                    views: "692만회"
+                },
+                video: {
+                    title: "마왕님 마구마구 긁기",
+                    videoId: "JdTcx0QF0G8",
+                    views: "130만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/36ddb9bb4f17593b60f1b63cec86611d",
+                song: {
+                    title: "별자리가 될 수 있다면",
+                    videoId: "eeIMg68ug9Y",
+                    views: "141만회"
+                },
+                video: {
+                    title: "후야와 스텔라이브 알아보기! (유니, 유니버스편)",
+                    videoId: "XOzN__Jr374",
+                    views: "29만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/4515b179f86b67b4981e16190817c580",
+                song: {
+                    title: "Pale",
+                    videoId: "pnU-h63twZM",
+                    views: "222만회"
+                },
+                video: {
+                    title: "김치전 타코야끼 만들기ㅋㅋ.. [크리스마스 특집 방송]",
+                    videoId: "UXqL_i0y9t4",
+                    views: "49만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/4325b1d5bbc321fad3042306646e2e50",
+                song: {
+                    title: "출항",
+                    videoId: "R_B4tmy2DVA",
+                    views: "1,396만회"
+                },
+                video: {
+                    title: "엄마 미안, 나 이제 시집 못 가",
+                    videoId: "cM9lzTYKPgs",
+                    views: "136만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/b044e3a3b9259246bc92e863e7d3f3b8",
+                song: {
+                    title: "낙향",
+                    videoId: "gBWIv6NvLcU",
+                    views: "802만회"
+                },
+                video: {
+                    title: "내 친구 랄로 【띵타이쿤】",
+                    videoId: "1hWXzDCxIP4",
+                    views: "110만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/a6c4ddb09cdb160478996007bff35296",
+                song: {
+                    title: "낮에 뜨는 달",
+                    videoId: "5j8voUwxzmU",
+                    views: "393만회"
+                },
+                video: {
+                    title: "우리 재혼했어요",
+                    videoId: "7if_R2-Id60",
+                    views: "112만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/4d812b586ff63f8a2946e64fa860bbf5",
+                song: {
+                    title: "비행정",
+                    videoId: "YC-QnlIEbJU",
+                    views: "539만회"
+                },
+                video: {
+                    title: "칠쌍파? 보스? 저 택시기산데요? [봉누도]",
+                    videoId: "Xlm7OogG6As",
+                    views: "74만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/8fd39bb8de623317de90654718638b10",
+                song: {
+                    title: "케세라세라",
+                    videoId: "J49wnPBsyrU",
+                    views: "338만회"
+                },
+                video: {
+                    title: "스텔유치원 1일차, 마왕보다 무서운 어린이들을 만났습니다",
+                    videoId: "pvpQ1V05F_w",
+                    views: "49만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/516937b5f85cbf2249ce31b0ad046b0f",
+                song: {
+                    title: "유령도쿄",
+                    videoId: "UWa_OiXDiQA",
+                    views: "513만회"
+                },
+                video: {
+                    title: "영어만 써야하는 메이드카페",
+                    videoId: "XpjA_Xu07ts",
+                    views: "93만회"
+                }
+            },
+            {
+                chzzk: "https://chzzk.naver.com/64d76089fba26b180d9c9e48a32600d9",
+                song: {
+                    title: "너에게 메롱",
+                    videoId: "KtZi0BN6lwg",
+                    views: "721만회"
+                },
+                video: {
+                    title: "서버운영자한테 전담마크 당한다 [쌀멋서버]",
+                    videoId: "0oe97k-Tirs",
+                    views: "57만회"
+                }
+            }
+        ];
 
         const firstPicks = [
             { title: "SUPADOPA", member: "아야츠노 유니", videoId: "R_RAWjqdgTs" },
@@ -911,6 +1227,95 @@
         document.querySelectorAll("[data-filter-link]").forEach((link) => {
             link.addEventListener("click", () => setMemberFilter(link.dataset.filterLink));
         });
+
+
+        /* =========================================================
+           RANDOM MEMBER RECOMMENDATION
+        ========================================================= */
+        let lastRandomMemberIndex = -1;
+
+        function createRecommendationMedia(kind, item, fallbackIndex) {
+            const card = document.createElement("article");
+            card.className = "recommendation-media";
+            card.append(createThumbnail(item.videoId, fallbackIndex));
+
+            const copy = document.createElement("div");
+            copy.className = "recommendation-copy";
+
+            const label = document.createElement("span");
+            label.className = "recommendation-kind";
+            label.textContent = kind;
+
+            const title = document.createElement("h3");
+            title.textContent = item.title;
+
+            const views = document.createElement("p");
+            views.textContent = "확인 당시 조회수 " + item.views;
+
+            const link = document.createElement("a");
+            link.className = "button";
+            link.href = "https://www.youtube.com/watch?v=" + item.videoId;
+            link.target = "_blank";
+            link.rel = "noopener";
+            link.textContent = kind.includes("노래") ? "▶ 노래 듣기" : "▶ 영상 보기";
+
+            copy.append(label, title, views, link);
+            card.append(copy);
+            return card;
+        }
+
+        function pickRandomMemberIndex() {
+            if (members.length < 2) return 0;
+
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * members.length);
+            } while (nextIndex === lastRandomMemberIndex);
+
+            lastRandomMemberIndex = nextIndex;
+            return nextIndex;
+        }
+
+        function renderRandomRecommendation() {
+            const index = pickRandomMemberIndex();
+            const member = members[index];
+            const recommendation = memberRecommendations[index];
+            const result = $("#randomResult");
+            const grid = $("#randomRecommendationGrid");
+
+            $("#randomMemberImage").src = memberAvatars[index];
+            $("#randomMemberImage").alt = member.name + " 프로필";
+            $("#randomMemberName").textContent = member.name;
+            $("#randomMemberDescription").textContent = member.description;
+            $("#randomChzzkLink").href = recommendation.chzzk;
+
+            grid.innerHTML = "";
+            grid.append(
+                createRecommendationMedia(
+                    "🏆 최고 조회수 비음악 영상",
+                    recommendation.video,
+                    index
+                ),
+                createRecommendationMedia(
+                    "🎵 최고 조회수 노래",
+                    recommendation.song,
+                    index
+                )
+            );
+
+            $("#randomDataNote").textContent =
+                recommendationCheckedAt +
+                " 기준으로 공식 YouTube 채널의 인기순 목록을 확인했습니다. " +
+                "조회수와 순위는 이후 달라질 수 있습니다.";
+
+            result.hidden = false;
+            result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+
+        $("#randomMemberButton").addEventListener(
+            "click",
+            renderRandomRecommendation
+        );
 
         /* =========================================================
            MUSIC
