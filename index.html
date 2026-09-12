@@ -114,10 +114,13 @@
         }
 
         .nav-button {
+            display: inline-flex;
+            align-items: center;
             padding: 8px 10px;
             color: var(--sub);
             border-color: transparent;
             background: transparent;
+            text-decoration: none;
         }
 
         .nav-button:hover,
@@ -218,6 +221,26 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+        }
+
+        .hero-guide-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 22px;
+            padding: 11px 15px;
+            color: white;
+            border: 1px solid rgba(104, 207, 255, 0.34);
+            border-radius: 12px;
+            background: rgba(104, 207, 255, 0.1);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 800;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .hero-guide-link:hover {
+            background: rgba(104, 207, 255, 0.2);
+            transform: translateY(-1px);
         }
 
         .home-grid {
@@ -826,6 +849,7 @@
                 <button class="nav-button" data-page="roll">룰렛</button>
                 <button class="nav-button" data-page="match">궁합 테스트</button>
                 <button class="nav-button" data-page="fan">FAN CARD</button>
+                <a class="nav-button" href="guide.html">입문 가이드 ↗</a>
             </nav>
         </div>
     </header>
@@ -836,6 +860,7 @@
                 <p class="eyebrow">WELCOME TO THE UNIVERSE</p>
                 <h1>STELLIVE FAN SPACE</h1>
                 <p class="muted">오늘 듣고 싶은 스텔라이브와 나만의 팬 카드를 한 곳에서 만나 보세요.</p>
+                <a class="hero-guide-link" href="guide.html">🌱 처음이라면 입문 가이드 보기</a>
             </div>
 
             <div class="home-grid">
