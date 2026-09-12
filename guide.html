@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스텔라이브 입문 가이드</title>
+
+    <style>
+        /* =========================================================
+           STELLIVE START GUIDE — standalone page
+        ========================================================= */
+        :root {
+            color-scheme: dark;
+            --bg: #060817;
+            --surface: rgba(18, 24, 55, 0.9);
+            --surface-strong: #151d3d;
+            --line: rgba(255, 255, 255, 0.13);
+            --text: #f7f8ff;
+            --sub: #b8c0df;
+            --purple: #9587ff;
+            --blue: #67ceff;
+            --pink: #ff93d6;
+            --mint: #72e2bc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text);
+            font-family: Pretendard, "Noto Sans KR", Arial, sans-serif;
+            background:
+                radial-gradient(circle at 15% -8%, rgba(120, 91, 255, 0.3), transparent 32%),
+                radial-gradient(circle at 95% 24%, rgba(61, 183, 255, 0.17), transparent 30%),
+                var(--bg);
+        }
+
+        body::before {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            content: "";
+            opacity: 0.35;
+            background-image: radial-gradient(#fff 1px, transparent 1px);
+            background-size: 46px 46px;
+            pointer-events: none;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--line);
+            background: rgba(6, 8, 23, 0.9);
+            backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: center;
+            min-height: 66px;
+        }
+
+        .brand {
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 0.7px;
+        }
+
+        .brand span {
+            color: var(--pink);
+        }
+
+        .nav {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav a {
+            padding: 8px 10px;
+            color: var(--sub);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero {
+            padding: 98px 0 72px;
+            text-align: center;
+        }
+
+        .kicker {
+            margin: 0 0 13px;
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1.9px;
+        }
+
+        .hero h1 {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: clamp(40px, 8vw, 76px);
+            line-height: 1.08;
+            letter-spacing: -2.2px;
+            background: linear-gradient(100deg, #fff, #cfc8ff, #75d5ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p:not(.kicker) {
+            max-width: 620px;
+            margin: 22px auto 0;
+            color: var(--sub);
+            line-height: 1.8;
+        }
+
+        .hero-actions,
+        .button-row {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 44px;
+            padding: 10px 15px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.07);
+            font-size: 14px;
+            font-weight: 800;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover {
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            border: 0;
+            background: linear-gradient(120deg, var(--purple), var(--pink));
+        }
+
+        .section {
+            padding: 68px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 24px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: clamp(29px, 5vw, 46px);
+            letter-spacing: -1.1px;
+        }
+
+        .section-heading p:not(.kicker) {
+            max-width: 680px;
+            margin: 10px 0 0;
+            color: var(--sub);
+            line-height: 1.7;
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: var(--surface);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        /* =========================================================
+           START STEPS
+        ========================================================= */
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .step-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 210px;
+            padding: 24px;
+        }
+
+        .step-number {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 34px;
+            height: 34px;
+            margin-bottom: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .step-card h3 {
+            margin: 0 0 9px;
+            font-size: 21px;
+        }
+
+        .muted {
+            color: var(--sub);
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           MEMBER EXPLORER
+        ========================================================= */
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .filter-button {
+            padding: 9px 12px;
+            color: var(--sub);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #141b38;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .filter-button.is-active,
+        .filter-button:hover {
+            color: white;
+            border-color: var(--purple);
+            background: rgba(149, 135, 255, 0.24);
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .member-card {
+            display: grid;
+            gap: 12px;
+            min-height: 236px;
+            padding: 17px;
+            text-align: left;
+        }
+
+        .member-card[hidden] {
+            display: none;
+        }
+
+        .member-card img {
+            width: 65px;
+            height: 65px;
+            border: 2px solid rgba(149, 135, 255, 0.72);
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .member-card h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .member-card p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .member-card a {
+            align-self: end;
+            color: #d6d0ff;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           CONTENT MAP
+        ========================================================= */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 13px;
+        }
+
+        .map-card {
+            padding: 20px;
+        }
+
+        .map-card h3 {
+            margin: 0 0 9px;
+        }
+
+        .map-icon {
+            display: block;
+            margin-bottom: 18px;
+            font-size: 32px;
+        }
+
+        .map-card a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #d6d0ff;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           MUSIC PICKS
+        ========================================================= */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 13px;
+        }
+
+        .music-card {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            gap: 13px;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .music-card img {
+            width: 96px;
+            height: 54px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #1d254a;
+        }
+
+        .music-card p,
+        .music-card h3 {
+            margin: 0;
+        }
+
+        .music-card h3 {
+            font-size: 16px;
+        }
+
+        .music-card p {
+            margin-top: 5px;
+            color: var(--sub);
+            font-size: 12px;
+        }
+
+        .music-card button {
+            margin-top: 10px;
+            padding: 0;
+            color: var(--blue);
+            border: 0;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        /* =========================================================
+           QUICK PATH QUIZ
+        ========================================================= */
+        .quiz-card {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 26px;
+        }
+
+        .quiz-status {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            color: var(--sub);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .quiz-progress {
+            overflow: hidden;
+            height: 8px;
+            margin: 11px 0 26px;
+            border-radius: 999px;
+            background: #29335d;
+        }
+
+        .quiz-progress > div {
+            width: 33.333%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--purple), var(--blue));
+            transition: width 0.25s ease;
+        }
+
+        .quiz-question {
+            margin: 0 0 20px;
+            font-size: clamp(23px, 4vw, 34px);
+            line-height: 1.35;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .quiz-option {
+            min-height: 70px;
+            padding: 14px;
+            text-align: left;
+            color: var(--text);
+            border: 1px solid #394570;
+            border-radius: 14px;
+            background: #151e3f;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--blue);
+            background: #202d5a;
+        }
+
+        .quiz-result {
+            display: grid;
+            gap: 12px;
+        }
+
+        .quiz-result h3,
+        .quiz-result p {
+            margin: 0;
+        }
+
+        /* =========================================================
+           CHECKLIST & FOOTER
+        ========================================================= */
+        .checklist {
+            display: grid;
+            gap: 10px;
+            padding: 22px;
+        }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .check-item input {
+            width: 19px;
+            height: 19px;
+            accent-color: var(--purple);
+        }
+
+        .check-summary {
+            margin: 0 0 14px;
+            color: var(--mint);
+            font-weight: 800;
+        }
+
+        .footer {
+            padding: 46px 0 55px;
+            color: var(--sub);
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .member-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .map-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .music-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 620px) {
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 12px 0;
+            }
+
+            .nav {
+                justify-content: flex-start;
+            }
+
+            .hero {
+                padding: 70px 0 40px;
+            }
+
+            .step-grid,
+            .member-grid,
+            .music-grid,
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+
+            .member-card {
+                grid-template-columns: 65px 1fr;
+                min-height: 0;
+            }
+
+            .member-card a {
+                grid-column: 2;
+            }
+
+            .map-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <div class="brand">STELLIVE <span>START GUIDE</span></div>
+            <nav class="nav" aria-label="가이드 메뉴">
+                <a href="#start">시작하기</a>
+                <a href="#members">멤버 찾기</a>
+                <a href="#music">음악</a>
+                <a href="#quiz">입문 추천</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="container hero">
+            <p class="kicker">FIRST TIME WITH STELLIVE?</p>
+            <h1>스텔라이브,<br>어디서부터 시작할까요?</h1>
+            <p>처음 온 사람도 부담 없이 즐길 수 있도록 멤버·콘텐츠·음악을 한 번에 안내하는 입문 가이드입니다.</p>
+            <div class="hero-actions">
+                <a class="button button-primary" href="#start">3분 입문 코스 시작</a>
+                <a class="button" href="index.html">FAN SPACE 열기</a>
+            </div>
+        </section>
+
+        <section class="container section" id="start">
+            <div class="section-heading">
+                <p class="kicker">THE EASY WAY IN</p>
+                <h2>처음이라면 이 순서로 시작해요</h2>
+                <p>정답은 없어요. 마음에 드는 단계부터 골라도 충분합니다.</p>
+            </div>
+
+            <div class="step-grid">
+                <article class="card step-card">
+                    <span class="step-number">01</span>
+                    <h3>멤버 한 명 만나기</h3>
+                    <p class="muted">성격이나 콘텐츠 취향이 끌리는 멤버의 최신 영상을 먼저 가볍게 봐 보세요.</p>
+                </article>
+                <article class="card step-card">
+                    <span class="step-number">02</span>
+                    <h3>좋아하는 콘텐츠 찾기</h3>
+                    <p class="muted">노래, 게임, 잡담, 합방 중 평소 좋아하던 형식으로 고르면 가장 자연스럽습니다.</p>
+                </article>
+                <article class="card step-card">
+                    <span class="step-number">03</span>
+                    <h3>노래 한 곡 저장하기</h3>
+                    <p class="muted">마음에 든 한 곡을 플레이리스트에 추가하면 다음 콘텐츠를 찾기도 쉬워져요.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="container section" id="members">
+            <div class="section-heading">
+                <p class="kicker">MEMBER EXPLORER</p>
+                <h2>어떤 멤버부터 볼까요?</h2>
+                <p>관심 있는 분위기를 고르고, 마음이 가는 멤버의 최신 영상으로 바로 이어가 보세요.</p>
+            </div>
+
+            <div class="filter-row" aria-label="관심 분야 필터">
+                <button class="filter-button is-active" data-filter="all">전체</button>
+                <button class="filter-button" data-filter="music">🎵 음악 중심</button>
+                <button class="filter-button" data-filter="game">🎮 게임·도전</button>
+                <button class="filter-button" data-filter="talk">💬 잡담·합방</button>
+            </div>
+
+            <div class="member-grid" id="memberGrid"></div>
+        </section>
+
+        <section class="container section">
+            <div class="section-heading">
+                <p class="kicker">CONTENT MAP</p>
+                <h2>취향별 콘텐츠 지도</h2>
+                <p>지금 원하는 기분에 맞춰 출발점을 골라 보세요.</p>
+            </div>
+
+            <div class="map-grid">
+                <article class="card map-card">
+                    <span class="map-icon">🎵</span>
+                    <h3>노래부터</h3>
+                    <p class="muted">커버·오리지널·라이브 무대에서 음악 취향을 찾아보세요.</p>
+                    <a href="#music">추천곡으로 가기 →</a>
+                </article>
+                <article class="card map-card">
+                    <span class="map-icon">🎮</span>
+                    <h3>게임부터</h3>
+                    <p class="muted">몰입감 있는 플레이와 예상 못 한 순간을 좋아한다면 좋아요.</p>
+                    <a href="#members" data-filter-link="game">게임 멤버 보기 →</a>
+                </article>
+                <article class="card map-card">
+                    <span class="map-icon">💬</span>
+                    <h3>잡담부터</h3>
+                    <p class="muted">편하게 이야기를 듣고 싶다면 최신 잡담·합방 영상부터 시작하세요.</p>
+                    <a href="#members" data-filter-link="talk">잡담 멤버 보기 →</a>
+                </article>
+                <article class="card map-card">
+                    <span class="map-icon">✨</span>
+                    <h3>아직 모르겠다면</h3>
+                    <p class="muted">짧은 질문에 답하면 지금의 취향에 맞는 출발점을 추천해 드려요.</p>
+                    <a href="#quiz">입문 추천 받기 →</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="container section" id="music">
+            <div class="section-heading">
+                <p class="kicker">MUSIC FIRST PICKS</p>
+                <h2>처음 듣기 좋은 스텔라이브 곡</h2>
+                <p>대표적인 오리지널 영상으로 시작해 보세요. 버튼을 누르면 YouTube에서 재생됩니다.</p>
+            </div>
+
+            <div class="music-grid" id="musicGrid"></div>
+        </section>
+
+        <section class="container section" id="quiz">
+            <div class="section-heading">
+                <p class="kicker">FIND YOUR START</p>
+                <h2>나에게 맞는 입문 코스</h2>
+                <p>세 가지 질문으로 지금 바로 즐길 콘텐츠의 방향을 찾아볼 수 있어요.</p>
+            </div>
+
+            <div class="card quiz-card" id="guideQuiz"></div>
+        </section>
+
+        <section class="container section">
+            <div class="section-heading">
+                <p class="kicker">MY FIRST DAY</p>
+                <h2>입문 체크리스트</h2>
+                <p>완료 상태는 이 브라우저에 저장됩니다. 부담 없이 하나씩 체크해 보세요.</p>
+            </div>
+
+            <p class="check-summary" id="checkSummary"></p>
+            <div class="card checklist" id="checklist"></div>
+        </section>
+    </main>
+
+    <footer class="container footer">
+        STELLIVE START GUIDE · 마음에 드는 방식으로 천천히 즐겨 보세요.
+    </footer>
+
+    <script>
+        /* =========================================================
+           DATA
+        ========================================================= */
+        const memberAvatars = ['https://yt3.googleusercontent.com/e3_TBkHSBwuzKRSkG1Uv5uGLiHmLUBMVogjWD35MJL7Fi_iccr8DonU6q_1XSmO4djEY9Cunabo=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/P3S4ABBTHA7UjA8WwHUV3t2gVDztLI1Ik8vaWviGIL7snZfyIYtkSXCXy54ifDJ3HdHaGfo-=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/cp8u310XkEP6vBdKFq4_-Zi-vYQqXam1ZbfO4ISEKAj5BNHQBRD4Ewo66nnht6ZlmT4iHp4tvpM=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/Qg1w7-AfnapCDTGj9IAjAMqVA_klyc7fEfHm-7oxepHeyCXgn63aafVUWFo1gXIraLNePMYvDA=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/1ks2G8FobMBkZE6NyPcLGii5H1CGx5eOATWAmcOHjrDK3Oh9yDZh6Z508vZ850JaJq6eaOZA_w=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/aBBmBfA_6zGskSPx65DMzPDbOczqRkl_FPj05OiUfsXD3AhE0jevgR0ERIH44J1wNGixAkztmfM=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/zGUz2JcpXrukVnH6p_i2mktbsYXOOWSxIMQ90bGsfbZvc33QMrdEySaUhnQ9gmaQafmaTAIG=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/6udVaS--18zwdLbH87AzU5Sg3NpuOTdx6umdvMkO8Y8uGqWzcxdhSjPgcH5-8octS_zwIKzAqw=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/QySeV39W4CDxJU0vpqCYiU0t1WHZnr4QMPCDmMSg0aXUHeTUU7KWLS-nA8n9nIpJK9m6E45PaA=s160-c-k-c0x00ffffff-no-rj','https://yt3.googleusercontent.com/NLe7Q3gHg8rVrxJwiqNH5mB6TUkqtdlHqcIma17TXvGQ24zqRkQtZcxGi9xGurKQUObNCRPXgQ=s160-c-k-c0x00ffffff-no-rj'];
+        const members = [
+          {
+                    "name": "아야츠노 유니",
+                    "channel": "https://www.youtube.com/@ayatsunoyuni/videos",
+                    "description": "개성 있는 에너지와 음악을 좋아한다면",
+                    "focus": "music"
+          },
+          {
+                    "name": "사키하네 후야",
+                    "channel": "https://www.youtube.com/@Sakihanechannel/videos",
+                    "description": "밝은 텐션과 활기찬 리액션이 좋다면",
+                    "focus": "talk"
+          },
+          {
+                    "name": "네네코 마시로",
+                    "channel": "https://www.youtube.com/@neneko_mashiro/videos",
+                    "description": "섬세한 감성과 잔잔한 보컬이 좋다면",
+                    "focus": "music"
+          },
+          {
+                    "name": "아카네 리제",
+                    "channel": "https://www.youtube.com/@akanelize/videos",
+                    "description": "노래·무대·감성을 모두 즐기고 싶다면",
+                    "focus": "music"
+          },
+          {
+                    "name": "시라유키 히나",
+                    "channel": "https://www.youtube.com/@shirayukihina/videos",
+                    "description": "차분한 분위기와 깊은 이야기가 좋다면",
+                    "focus": "music"
+          },
+          {
+                    "name": "아라하시 타비",
+                    "channel": "https://www.youtube.com/@arahashitabi/videos",
+                    "description": "도전적인 에너지와 몰입감이 좋다면",
+                    "focus": "game"
+          },
+          {
+                    "name": "하나코 나나",
+                    "channel": "https://www.youtube.com/@hanako_nana/videos",
+                    "description": "따뜻한 대화와 다채로운 콘텐츠가 좋다면",
+                    "focus": "talk"
+          },
+          {
+                    "name": "유즈하 리코",
+                    "channel": "https://www.youtube.com/@yuzuhariko/videos",
+                    "description": "활동적인 분위기와 노래를 함께 원한다면",
+                    "focus": "game"
+          },
+          {
+                    "name": "아오쿠모 린",
+                    "channel": "https://www.youtube.com/@aokumorin/videos",
+                    "description": "감성적인 음악과 새로운 발견이 좋다면",
+                    "focus": "music"
+          },
+          {
+                    "name": "텐코 시부키",
+                    "channel": "https://www.youtube.com/@tenkoshibuki/videos",
+                    "description": "친화력 있는 에너지와 도전이 좋다면",
+                    "focus": "talk"
+          }
+];
+
+        const firstPicks = [
+            { title: "SUPADOPA", member: "아야츠노 유니", videoId: "R_RAWjqdgTs" },
+            { title: "봄꿈", member: "네네코 마시로", videoId: "_8uoathMY0A" },
+            { title: "Festa!", member: "아카네 리제", videoId: "3_0Ut2tlxLM" },
+            { title: "여로", member: "아라하시 타비", videoId: "G5tTozKJRD4" },
+            { title: "Hush Trap", member: "하나코 나나", videoId: "jvZRK7W7S9Y" },
+            { title: "Maid My Way", member: "아오쿠모 린", videoId: "ZYSQLv_L26Y" }
+        ];
+
+        const quizQuestions = [
+            {
+                question: "처음 보고 싶은 콘텐츠는 어떤 느낌인가요?",
+                choices: [
+                    { label: "노래와 무대에 집중하고 싶어요", result: "music" },
+                    { label: "재밌는 게임 플레이가 좋아요", result: "game" },
+                    { label: "편안한 수다와 합방이 좋아요", result: "talk" },
+                    { label: "아직 모르겠어요. 가볍게 둘러볼래요", result: "explore" }
+                ]
+            },
+            {
+                question: "지금의 기분과 가장 가까운 것은?",
+                choices: [
+                    { label: "새로운 노래를 발견하고 싶어요", result: "music" },
+                    { label: "시원하게 웃고 싶어요", result: "game" },
+                    { label: "누군가의 이야기를 듣고 싶어요", result: "talk" },
+                    { label: "여러 멤버를 조금씩 보고 싶어요", result: "explore" }
+                ]
+            },
+            {
+                question: "첫 영상은 얼마나 길면 좋을까요?",
+                choices: [
+                    { label: "노래 한두 곡처럼 짧고 강렬하게", result: "music" },
+                    { label: "몰입해서 볼 수 있는 플레이 영상", result: "game" },
+                    { label: "켜 두고 편하게 들을 수 있는 영상", result: "talk" },
+                    { label: "추천을 따라 천천히 정할래요", result: "explore" }
+                ]
+            }
+        ];
+
+        const quizResults = {
+            music: {
+                title: "🎵 음악 입문 코스",
+                text: "오리지널·커버곡을 먼저 들어 보세요. 마음에 든 멤버의 채널로 이어가면 자연스럽게 라이브와 다른 콘텐츠도 발견할 수 있어요.",
+                target: "#music",
+                button: "추천곡 듣기"
+            },
+            game: {
+                title: "🎮 게임·도전 입문 코스",
+                text: "게임과 도전적인 콘텐츠에서 에너지와 리액션을 느껴 보세요. 멤버 탐색에서 게임 중심 필터를 열어 볼 수 있어요.",
+                target: "#members",
+                button: "게임 멤버 보기",
+                filter: "game"
+            },
+            talk: {
+                title: "💬 잡담·합방 입문 코스",
+                text: "잡담과 합방은 멤버들의 자연스러운 매력을 알기 좋은 출발점이에요. 최신 영상을 가볍게 틀어 보세요.",
+                target: "#members",
+                button: "잡담 멤버 보기",
+                filter: "talk"
+            },
+            explore: {
+                title: "✨ 탐험 입문 코스",
+                text: "하나만 고르기 어렵다면 다양한 멤버를 천천히 둘러보는 것이 좋아요. 끌리는 프로필의 최신 영상부터 시작해 보세요.",
+                target: "#members",
+                button: "멤버 탐색 시작"
+            }
+        };
+
+        const checklistItems = [
+            "관심 가는 멤버 한 명의 최신 영상 보기",
+            "스텔라이브 노래 한 곡 들어 보기",
+            "좋아하는 콘텐츠 형식 찾기",
+            "FAN SPACE에서 나만의 카드 만들기"
+        ];
+
+        /* =========================================================
+           HELPERS
+        ========================================================= */
+        const $ = (selector) => document.querySelector(selector);
+
+        function openVideo(videoId) {
+            window.open("https://www.youtube.com/watch?v=" + videoId, "_blank", "noopener");
+        }
+
+        function createThumbnail(videoId, fallbackIndex) {
+            const image = new Image();
+
+            image.src = "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
+            image.alt = "YouTube 영상 썸네일";
+            image.onerror = () => {
+                image.onerror = null;
+                image.src = memberAvatars[fallbackIndex];
+            };
+
+            return image;
+        }
+
+        /* =========================================================
+           MEMBER EXPLORER
+        ========================================================= */
+        function renderMembers(filter) {
+            const grid = $("#memberGrid");
+            grid.innerHTML = "";
+
+            members.forEach((member, index) => {
+                const card = document.createElement("article");
+                card.className = "card member-card";
+                card.hidden = filter !== "all" && member.focus !== filter;
+
+                const image = document.createElement("img");
+                image.src = memberAvatars[index];
+                image.alt = member.name + " 프로필";
+
+                const name = document.createElement("h3");
+                name.textContent = member.name;
+
+                const description = document.createElement("p");
+                description.className = "muted";
+                description.textContent = member.description;
+
+                const link = document.createElement("a");
+                link.href = member.channel;
+                link.target = "_blank";
+                link.rel = "noopener";
+                link.textContent = "최신 영상 보기 →";
+
+                card.append(image, name, description, link);
+                grid.append(card);
+            });
+        }
+
+        function setMemberFilter(filter) {
+            document.querySelectorAll("[data-filter]").forEach((button) => {
+                button.classList.toggle("is-active", button.dataset.filter === filter);
+            });
+            renderMembers(filter);
+        }
+
+        document.querySelectorAll("[data-filter]").forEach((button) => {
+            button.addEventListener("click", () => setMemberFilter(button.dataset.filter));
+        });
+
+        document.querySelectorAll("[data-filter-link]").forEach((link) => {
+            link.addEventListener("click", () => setMemberFilter(link.dataset.filterLink));
+        });
+
+        /* =========================================================
+           MUSIC
+        ========================================================= */
+        function renderMusicPicks() {
+            const grid = $("#musicGrid");
+            grid.innerHTML = "";
+
+            firstPicks.forEach((pick, index) => {
+                const card = document.createElement("article");
+                card.className = "card music-card";
+                card.append(createThumbnail(pick.videoId, index));
+
+                const content = document.createElement("div");
+                const title = document.createElement("h3");
+                const member = document.createElement("p");
+                const button = document.createElement("button");
+
+                title.textContent = pick.title;
+                member.textContent = pick.member;
+                button.textContent = "▶ YouTube에서 듣기";
+                button.addEventListener("click", () => openVideo(pick.videoId));
+
+                content.append(title, member, button);
+                card.append(content);
+                grid.append(card);
+            });
+        }
+
+        /* =========================================================
+           QUICK START QUIZ
+        ========================================================= */
+        let quizIndex = 0;
+        const quizAnswers = [];
+
+        function renderGuideQuiz() {
+            const container = $("#guideQuiz");
+            const question = quizQuestions[quizIndex];
+            const progress = ((quizIndex + 1) / quizQuestions.length) * 100;
+
+            container.innerHTML = "";
+
+            const status = document.createElement("div");
+            status.className = "quiz-status";
+            status.innerHTML = "<span>" + (quizIndex + 1) + " / " + quizQuestions.length + "</span><span>" + Math.round(progress) + "%</span>";
+
+            const track = document.createElement("div");
+            track.className = "quiz-progress";
+            const value = document.createElement("div");
+            value.style.width = progress + "%";
+            track.append(value);
+
+            const title = document.createElement("h3");
+            title.className = "quiz-question";
+            title.textContent = question.question;
+
+            const options = document.createElement("div");
+            options.className = "quiz-options";
+
+            question.choices.forEach((choice) => {
+                const button = document.createElement("button");
+                button.className = "quiz-option";
+                button.textContent = choice.label;
+                button.addEventListener("click", () => {
+                    quizAnswers.push(choice.result);
+                    quizIndex += 1;
+
+                    if (quizIndex === quizQuestions.length) {
+                        renderQuizResult();
+                    } else {
+                        renderGuideQuiz();
+                    }
+                });
+                options.append(button);
+            });
+
+            container.append(status, track, title, options);
+        }
+
+        function renderQuizResult() {
+            const scores = { music: 0, game: 0, talk: 0, explore: 0 };
+            quizAnswers.forEach((answer) => scores[answer] += 1);
+
+            const best = Object.keys(scores).sort((a, b) => scores[b] - scores[a])[0];
+            const result = quizResults[best];
+            const container = $("#guideQuiz");
+
+            container.innerHTML = "";
+            const wrap = document.createElement("div");
+            wrap.className = "quiz-result";
+
+            const title = document.createElement("h3");
+            title.textContent = result.title;
+
+            const text = document.createElement("p");
+            text.className = "muted";
+            text.textContent = result.text;
+
+            const actions = document.createElement("div");
+            actions.className = "button-row";
+
+            const go = document.createElement("a");
+            go.className = "button button-primary";
+            go.href = result.target;
+            go.textContent = result.button;
+            go.addEventListener("click", () => {
+                if (result.filter) setMemberFilter(result.filter);
+            });
+
+            const retry = document.createElement("button");
+            retry.className = "button";
+            retry.textContent = "다시 하기";
+            retry.addEventListener("click", () => {
+                quizIndex = 0;
+                quizAnswers.length = 0;
+                renderGuideQuiz();
+            });
+
+            actions.append(go, retry);
+            wrap.append(title, text, actions);
+            container.append(wrap);
+        }
+
+        /* =========================================================
+           CHECKLIST
+        ========================================================= */
+        const checklistKey = "stellive-start-guide-checklist";
+        const storedChecklist = JSON.parse(localStorage.getItem(checklistKey) || "[]");
+
+        function renderChecklist() {
+            const container = $("#checklist");
+            const completed = storedChecklist.filter(Boolean).length;
+
+            $("#checkSummary").textContent =
+                "오늘의 입문 진행도: " + completed + " / " + checklistItems.length;
+
+            container.innerHTML = "";
+
+            checklistItems.forEach((label, index) => {
+                const item = document.createElement("label");
+                item.className = "check-item";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = Boolean(storedChecklist[index]);
+                checkbox.addEventListener("change", () => {
+                    storedChecklist[index] = checkbox.checked;
+                    localStorage.setItem(checklistKey, JSON.stringify(storedChecklist));
+                    renderChecklist();
+                });
+
+                const text = document.createElement("span");
+                text.textContent = label;
+
+                item.append(checkbox, text);
+                container.append(item);
+            });
+        }
+
+        /* =========================================================
+           INITIAL RENDER
+        ========================================================= */
+        renderMembers("all");
+        renderMusicPicks();
+        renderGuideQuiz();
+        renderChecklist();
+    </script>
+</body>
+</html>
