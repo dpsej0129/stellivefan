@@ -2137,7 +2137,7 @@
                 type: resolvedKind === "music" ? "song" : "video",
                 memberIndex: resolvedMemberIndex,
                 videoId,
-                title: song ? song.title : catalogVideo ? catalogVideo.title : "YouTube 영상"
+                title: catalogVideo ? catalogVideo.title : song ? song.title : "YouTube 영상"
             });
             saveState();
             refreshHubIfActive();
