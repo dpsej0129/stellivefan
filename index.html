@@ -787,6 +787,330 @@
             }
         }
 
+
+        /* =========================================================
+           FAN HUB
+        ========================================================= */
+        .hub-stack {
+            display: grid;
+            gap: 18px;
+        }
+
+        .hub-card {
+            padding: 22px;
+        }
+
+        .hub-card h3 {
+            margin: 0 0 6px;
+        }
+
+        .hub-card > .muted {
+            margin-top: 0;
+        }
+
+        .hub-summary-grid,
+        .library-grid,
+        .catalog-grid,
+        .compare-result {
+            display: grid;
+            gap: 12px;
+        }
+
+        .hub-summary-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .summary-tile {
+            padding: 17px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .summary-tile span,
+        .summary-tile strong {
+            display: block;
+        }
+
+        .summary-tile span {
+            color: var(--sub);
+            font-size: 12px;
+        }
+
+        .summary-tile strong {
+            margin-top: 7px;
+            font-size: 24px;
+        }
+
+        .search-toolbar,
+        .compare-controls,
+        .mission-actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-toolbar input {
+            flex: 1 1 240px;
+        }
+
+        .search-toolbar select,
+        .compare-controls select {
+            min-width: 160px;
+        }
+
+        .search-results,
+        .library-list {
+            display: grid;
+            gap: 9px;
+            margin-top: 16px;
+        }
+
+        .search-item,
+        .library-item {
+            display: grid;
+            grid-template-columns: 56px minmax(0, 1fr) auto;
+            gap: 12px;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .search-item img,
+        .library-item img {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: #1d254a;
+        }
+
+        .search-item h4,
+        .search-item p,
+        .library-item h4,
+        .library-item p {
+            margin: 0;
+        }
+
+        .search-item p,
+        .library-item p {
+            margin-top: 4px;
+            color: var(--sub);
+            font-size: 12px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .item-actions .button {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+
+        .empty-panel {
+            padding: 18px;
+            color: var(--sub);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .mission-box {
+            padding: 18px;
+            border: 1px solid rgba(115, 230, 191, 0.3);
+            border-radius: 16px;
+            background: rgba(115, 230, 191, 0.08);
+        }
+
+        .mission-box h4 {
+            margin: 0 0 7px;
+            font-size: 20px;
+        }
+
+        .mission-box p {
+            margin: 0 0 15px;
+        }
+
+        .taste-layout {
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .taste-bars {
+            display: grid;
+            gap: 12px;
+        }
+
+        .taste-row {
+            display: grid;
+            grid-template-columns: 90px 1fr 46px;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .taste-track {
+            overflow: hidden;
+            height: 10px;
+            border-radius: 999px;
+            background: #263057;
+        }
+
+        .taste-value {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--purple), var(--blue));
+        }
+
+        .taste-summary {
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(149, 135, 255, 0.1);
+            text-align: center;
+        }
+
+        .taste-summary strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 23px;
+        }
+
+        .library-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .library-column {
+            min-width: 0;
+            padding: 15px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.035);
+        }
+
+        .library-column h4 {
+            margin: 0;
+        }
+
+        .catalog-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-top: 16px;
+        }
+
+        .catalog-card {
+            display: grid;
+            grid-template-columns: 76px minmax(0, 1fr);
+            gap: 14px;
+            padding: 15px;
+        }
+
+        .catalog-card.is-discovered {
+            border-color: rgba(115, 230, 191, 0.5);
+        }
+
+        .catalog-card img {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .catalog-card h4,
+        .catalog-card p {
+            margin: 0;
+        }
+
+        .catalog-card p {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .catalog-card .item-actions {
+            grid-column: 1 / -1;
+            justify-content: flex-start;
+        }
+
+        .progress-caption {
+            color: var(--mint);
+            font-weight: 800;
+        }
+
+        .compare-controls {
+            margin: 15px 0;
+        }
+
+        .compare-result {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .compare-card {
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .compare-card img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .compare-card h4 {
+            margin: 10px 0 7px;
+            font-size: 20px;
+        }
+
+        .compare-card dl {
+            display: grid;
+            grid-template-columns: 86px 1fr;
+            gap: 7px;
+            margin: 14px 0 0;
+            font-size: 13px;
+        }
+
+        .compare-card dt {
+            color: var(--sub);
+        }
+
+        .compare-card dd {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .theme-aurora {
+            background: linear-gradient(145deg, #0f3151, #31215f, #164444);
+        }
+
+        .theme-rose {
+            background: linear-gradient(145deg, #421b46, #63243f, #2d1d51);
+        }
+
+        .theme-midnight {
+            background: linear-gradient(145deg, #071326, #101d3d, #070b17);
+        }
+
+        .frame-glow {
+            border-color: rgba(104, 207, 255, 0.8);
+            box-shadow: 0 0 0 2px rgba(104, 207, 255, 0.13),
+                0 20px 60px rgba(67, 160, 255, 0.3);
+        }
+
+        .frame-gold {
+            border-color: rgba(255, 210, 122, 0.9);
+            box-shadow: 0 0 0 2px rgba(255, 210, 122, 0.12),
+                0 20px 60px rgba(255, 178, 74, 0.24);
+        }
+
         /* =========================================================
            RESPONSIVE
         ========================================================= */
@@ -799,7 +1123,12 @@
 
             .home-grid,
             .song-list,
-            .roulette-layout {
+            .roulette-layout,
+            .hub-summary-grid,
+            .library-grid,
+            .catalog-grid,
+            .compare-result,
+            .taste-layout {
                 grid-template-columns: 1fr;
             }
 
@@ -818,6 +1147,22 @@
 
             .answer-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .search-item,
+            .library-item {
+                grid-template-columns: 48px minmax(0, 1fr);
+            }
+
+            .search-item img,
+            .library-item img {
+                width: 48px;
+                height: 48px;
+            }
+
+            .item-actions {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
             }
         }
 
@@ -848,6 +1193,7 @@
                 <button class="nav-button" data-page="today">오늘의 스텔라이브</button>
                 <button class="nav-button" data-page="roll">룰렛</button>
                 <button class="nav-button" data-page="match">궁합 테스트</button>
+                <button class="nav-button" data-page="hub">팬 허브</button>
                 <button class="nav-button" data-page="fan">FAN CARD</button>
                 <a class="nav-button" href="guide.html">입문 가이드 ↗</a>
             </nav>
@@ -879,6 +1225,10 @@
                 <button class="card feature-card" data-go="match">
                     <strong>💫 궁합 테스트</strong>
                     <span class="muted">20문항으로 나와 가장 잘 맞는 멤버를 찾아요.</span>
+                </button>
+                <button class="card feature-card" data-go="hub">
+                    <strong>🪐 팬 허브</strong>
+                    <span class="muted">보관함·도감·미션·검색·취향 분석을 한곳에서 즐겨요.</span>
                 </button>
             </div>
         </section>
@@ -936,7 +1286,11 @@
                 <h2>오늘의 STELLIVE</h2>
                 <p class="muted">날짜 키를 기준으로 저장하며, 날짜가 바뀌면 새로운 추천을 만듭니다.</p>
                 <div id="todayResult"></div>
-                <button class="button button-primary" id="showToday">오늘의 추천 보기</button>
+                <div class="fan-card-actions">
+                    <button class="button button-primary" id="showToday">오늘의 추천 보기</button>
+                    <button class="button" id="saveTodaySong">♡ 노래 보관</button>
+                    <button class="button" id="saveTodayImage">🖼️ 결과 이미지</button>
+                </div>
             </div>
         </section>
 
@@ -992,9 +1346,102 @@
             </div>
         </section>
 
+
+        <section class="page" id="hub">
+            <div class="section-heading">
+                <p class="eyebrow">MY STELLIVE HUB</p>
+                <h2>팬 허브</h2>
+                <p class="muted page-description">
+                    사이트 안에서 고른 멤버와 콘텐츠가 보관함·도감·취향 분석·팬카드에 함께 반영됩니다.
+                </p>
+            </div>
+
+            <div class="hub-stack">
+                <div class="hub-summary-grid" id="hubSummary"></div>
+
+                <section class="card hub-card">
+                    <h3>🔎 통합 검색</h3>
+                    <p class="muted">멤버명, 곡 종류, 곡명과 대표 영상을 한 번에 검색할 수 있어요.</p>
+                    <div class="search-toolbar">
+                        <input id="catalogSearch" type="search" placeholder="예: 아카네 리제, 커버곡, 여로">
+                        <select id="catalogFilter" aria-label="검색 종류">
+                            <option value="all">전체</option>
+                            <option value="member">멤버</option>
+                            <option value="song">모든 노래</option>
+                            <option value="cover">커버곡</option>
+                            <option value="original">오리지널곡</option>
+                            <option value="video">일반 영상</option>
+                            <option value="game">게임·도전</option>
+                            <option value="talk">잡담·합방</option>
+                        </select>
+                        <button class="button button-primary" id="runCatalogSearch" type="button">검색</button>
+                    </div>
+                    <div class="search-results" id="catalogSearchResults"></div>
+                </section>
+
+                <section class="card hub-card">
+                    <h3>⭐ 오늘의 팬 미션</h3>
+                    <p class="muted">날짜마다 하나의 미션이 정해지고, 완료 기록과 연속 달성일이 저장됩니다.</p>
+                    <div class="mission-box" id="dailyMission"></div>
+                </section>
+
+                <section class="card hub-card">
+                    <h3>📊 나의 콘텐츠 취향</h3>
+                    <p class="muted">이 사이트에서 직접 연 노래·게임·잡담 콘텐츠를 기준으로 분석합니다.</p>
+                    <div class="taste-layout">
+                        <div class="taste-bars" id="tasteBars"></div>
+                        <div class="taste-summary" id="tasteSummary"></div>
+                    </div>
+                </section>
+
+                <section class="card hub-card">
+                    <h3>🕘 최근 시청 기록</h3>
+                    <p class="muted">사이트에서 최근에 연 콘텐츠를 최대 10개까지 다시 확인할 수 있어요.</p>
+                    <div class="search-results" id="recentHistory"></div>
+                </section>
+
+                <section class="card hub-card">
+                    <h3>💜 나만의 보관함</h3>
+                    <p class="muted">좋아하는 멤버·노래·영상을 저장하고 팬카드의 최애 후보로 사용할 수 있어요.</p>
+                    <div class="library-grid">
+                        <div class="library-column">
+                            <h4>멤버</h4>
+                            <div class="library-list" id="memberLibrary"></div>
+                        </div>
+                        <div class="library-column">
+                            <h4>노래</h4>
+                            <div class="library-list" id="songLibrary"></div>
+                        </div>
+                        <div class="library-column">
+                            <h4>영상</h4>
+                            <div class="library-list" id="videoLibrary"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card hub-card">
+                    <h3>🌌 스텔라이브 멤버 도감</h3>
+                    <p class="muted">사이트에서 멤버의 콘텐츠를 열거나 룰렛에서 만나면 도감에 기록됩니다.</p>
+                    <p class="progress-caption" id="catalogProgress"></p>
+                    <div class="catalog-grid" id="memberCatalog"></div>
+                </section>
+
+                <section class="card hub-card">
+                    <h3>⚖️ 멤버 비교</h3>
+                    <p class="muted">두 멤버의 콘텐츠 성향과 대표 영상을 나란히 비교해 보세요.</p>
+                    <div class="compare-controls">
+                        <select id="compareMemberA" aria-label="첫 번째 멤버"></select>
+                        <select id="compareMemberB" aria-label="두 번째 멤버"></select>
+                        <button class="button button-primary" id="compareMembers" type="button">비교하기</button>
+                    </div>
+                    <div class="compare-result" id="compareResult"></div>
+                </section>
+            </div>
+        </section>
+
         <section class="page" id="fan">
             <div class="fan-card" id="fanCard">
-                <p class="eyebrow">STELLIVE FAN CARD</p>
+                <p class="eyebrow" id="fanCardTitle">STELLIVE FAN CARD</p>
                 <h2 id="fanName">FAN #STEL</h2>
                 <p class="muted" id="fanIntro">나만의 스텔라이브 팬 프로필</p>
 
@@ -1002,6 +1449,9 @@
                 <div class="fan-card-row"><span>🎵 최애곡</span><strong id="fanSong">아직 선택 안 함</strong></div>
                 <div class="fan-card-row"><span>✨ 오늘의 멤버</span><strong id="fanToday">-</strong></div>
                 <div class="fan-card-row"><span>🎮 좋아하는 콘텐츠</span><strong id="fanContent">아직 선택 안 함</strong></div>
+                <div class="fan-card-row"><span>📺 최애 영상</span><a id="fanVideo" target="_blank" rel="noopener">아직 선택 안 함</a></div>
+                <div class="fan-card-row"><span>📊 나의 취향</span><strong id="fanTaste">아직 분석 전</strong></div>
+                <div class="fan-card-row"><span>🔥 미션 연속 달성</span><strong id="fanStreak">0일</strong></div>
                 <div class="fan-card-row"><span>💫 궁합 멤버 🔒</span><strong id="fanMatch">궁합 테스트를 해 보세요</strong></div>
                 <div class="fan-card-row"><span>📊 궁합 점수 🔒</span><strong id="fanScore">-</strong></div>
                 <div class="fan-card-row"><span>🏅 활동 배지</span><span class="badge-list" id="fanBadges"></span></div>
@@ -1009,6 +1459,7 @@
 
                 <div class="fan-card-actions">
                     <button class="button button-primary" id="editFanCard">✏️ 카드 수정</button>
+                    <button class="button" id="saveFanCardImage">🖼️ PNG 저장</button>
                     <button class="button" id="shareFanCard">📤 카드 공유</button>
                 </div>
             </div>
@@ -1021,6 +1472,30 @@
                     <div class="editor-field">
                         <label for="fanNameInput">닉네임</label>
                         <input id="fanNameInput" maxlength="24" placeholder="예: STEL FAN">
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="fanTitleInput">카드 칭호</label>
+                        <input id="fanTitleInput" maxlength="32" placeholder="예: STELLIVE EXPLORER">
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="fanThemeSelect">배경 테마</label>
+                        <select id="fanThemeSelect">
+                            <option value="cosmic">코스믹 퍼플</option>
+                            <option value="aurora">오로라</option>
+                            <option value="rose">로즈 네뷸라</option>
+                            <option value="midnight">미드나이트</option>
+                        </select>
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="fanFrameSelect">테두리</label>
+                        <select id="fanFrameSelect">
+                            <option value="soft">소프트</option>
+                            <option value="glow">블루 글로우</option>
+                            <option value="gold">골드</option>
+                        </select>
                     </div>
 
                     <div class="editor-field">
@@ -1041,6 +1516,16 @@
                     <div class="editor-field is-wide">
                         <label for="fanContentInput">좋아하는 콘텐츠</label>
                         <input id="fanContentInput" maxlength="80" placeholder="예: 노래 · 게임 · 합방">
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="fanVideoTitleInput">최애 영상 제목</label>
+                        <input id="fanVideoTitleInput" maxlength="80" placeholder="보관함에서 선택하거나 직접 입력">
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="fanVideoUrlInput">최애 영상 URL</label>
+                        <input id="fanVideoUrlInput" type="url" placeholder="https://www.youtube.com/watch?v=...">
                     </div>
 
                     <div class="editor-field is-wide">
@@ -1380,6 +1865,114 @@
             "https://www.youtube.com/@tenkoshibuki/videos"
         ];
 
+
+        /*
+         * 멤버 도감·검색·비교·보관함에서 공통으로 사용하는 정보입니다.
+         * 인기 영상과 노래는 2026.09.12 공식 YouTube 채널 인기순 기준입니다.
+         */
+        const memberCatalogData = [
+            {
+                focus: "talk",
+                focusLabel: "잡담·합방",
+                description: "편안한 잡담과 재치 있는 멤버 간 티키타카",
+                tags: ["잡담", "합방", "리액션"],
+                chzzk: "https://chzzk.naver.com/45e71a76e949e16a34764deb962f9d9f",
+                topSong: { title: "내꺼 하는 법", id: "pkypi5nXSYM", views: "692만회" },
+                topVideo: { title: "마왕님 마구마구 긁기", id: "JdTcx0QF0G8", views: "130만회" }
+            },
+            {
+                focus: "game",
+                focusLabel: "게임·도전",
+                description: "밝은 텐션과 새로운 게임에 뛰어드는 도전",
+                tags: ["게임", "도전", "리액션"],
+                chzzk: "https://chzzk.naver.com/36ddb9bb4f17593b60f1b63cec86611d",
+                topSong: { title: "별자리가 될 수 있다면", id: "eeIMg68ug9Y", views: "141만회" },
+                topVideo: { title: "후야와 스텔라이브 알아보기! (유니, 유니버스편)", id: "XOzN__Jr374", views: "29만회" }
+            },
+            {
+                focus: "game",
+                focusLabel: "게임·도전",
+                description: "몰입감 있는 플레이와 엉뚱한 도전의 재미",
+                tags: ["게임", "도전", "예능"],
+                chzzk: "https://chzzk.naver.com/4515b179f86b67b4981e16190817c580",
+                topSong: { title: "Pale", id: "pnU-h63twZM", views: "222만회" },
+                topVideo: { title: "김치전 타코야끼 만들기ㅋㅋ..", id: "UXqL_i0y9t4", views: "49만회" }
+            },
+            {
+                focus: "music",
+                focusLabel: "음악 중심",
+                description: "강한 보컬과 섬세한 감성을 함께 담은 음악",
+                tags: ["보컬", "커버", "무대"],
+                chzzk: "https://chzzk.naver.com/4325b1d5bbc321fad3042306646e2e50",
+                topSong: { title: "출항", id: "R_B4tmy2DVA", views: "1,396만회" },
+                topVideo: { title: "엄마 미안, 나 이제 시집 못 가", id: "cM9lzTYKPgs", views: "136만회" }
+            },
+            {
+                focus: "talk",
+                focusLabel: "잡담·합방",
+                description: "차분한 이야기와 자연스럽게 이어지는 합방",
+                tags: ["잡담", "합방", "감성"],
+                chzzk: "https://chzzk.naver.com/b044e3a3b9259246bc92e863e7d3f3b8",
+                topSong: { title: "낙향", id: "gBWIv6NvLcU", views: "802만회" },
+                topVideo: { title: "내 친구 랄로 【띵타이쿤】", id: "1hWXzDCxIP4", views: "110만회" }
+            },
+            {
+                focus: "game",
+                focusLabel: "게임·도전",
+                description: "활동적인 게임 플레이와 거침없는 도전",
+                tags: ["게임", "도전", "에너지"],
+                chzzk: "https://chzzk.naver.com/a6c4ddb09cdb160478996007bff35296",
+                topSong: { title: "낮에 뜨는 달", id: "5j8voUwxzmU", views: "393만회" },
+                topVideo: { title: "우리 재혼했어요", id: "7if_R2-Id60", views: "112만회" }
+            },
+            {
+                focus: "music",
+                focusLabel: "음악 중심",
+                description: "다채로운 음색과 따뜻한 분위기의 음악",
+                tags: ["음악", "보컬", "감성"],
+                chzzk: "https://chzzk.naver.com/4d812b586ff63f8a2946e64fa860bbf5",
+                topSong: { title: "비행정", id: "YC-QnlIEbJU", views: "539만회" },
+                topVideo: { title: "칠쌍파? 보스? 저 택시기산데요?", id: "Xlm7OogG6As", views: "74만회" }
+            },
+            {
+                focus: "talk",
+                focusLabel: "잡담·합방",
+                description: "따뜻한 잡담과 여러 멤버가 어울리는 합방",
+                tags: ["잡담", "합방", "친화력"],
+                chzzk: "https://chzzk.naver.com/8fd39bb8de623317de90654718638b10",
+                topSong: { title: "케세라세라", id: "J49wnPBsyrU", views: "338만회" },
+                topVideo: { title: "스텔유치원 1일차", id: "pvpQ1V05F_w", views: "49만회" }
+            },
+            {
+                focus: "music",
+                focusLabel: "음악 중심",
+                description: "감성적인 보컬과 새로운 곡을 발견하는 즐거움",
+                tags: ["음악", "감성", "커버"],
+                chzzk: "https://chzzk.naver.com/516937b5f85cbf2249ce31b0ad046b0f",
+                topSong: { title: "유령도쿄", id: "UWa_OiXDiQA", views: "513만회" },
+                topVideo: { title: "영어만 써야하는 메이드카페", id: "XpjA_Xu07ts", views: "93만회" }
+            },
+            {
+                focus: "talk",
+                focusLabel: "잡담·합방",
+                description: "친화력 있는 대화와 활기찬 합방 분위기",
+                tags: ["잡담", "합방", "에너지"],
+                chzzk: "https://chzzk.naver.com/64d76089fba26b180d9c9e48a32600d9",
+                topSong: { title: "너에게 메롱", id: "KtZi0BN6lwg", views: "721만회" },
+                topVideo: { title: "서버운영자한테 전담마크 당한다", id: "0oe97k-Tirs", views: "57만회" }
+            }
+        ];
+
+        const dailyMissionTemplates = [
+            { title: "새로운 커버곡 한 곡 듣기", text: "플레이리스트에서 평소 듣지 않던 커버곡을 열어 보세요.", page: "play", kind: "music" },
+            { title: "게임 중심 멤버 만나기", text: "도감에서 게임·도전 멤버의 영상을 한 편 확인해 보세요.", page: "hub", kind: "game" },
+            { title: "잡담·합방 콘텐츠 찾아보기", text: "잡담·합방 멤버의 채널에서 마음에 드는 영상을 골라 보세요.", page: "hub", kind: "talk" },
+            { title: "룰렛 한 번 돌리기", text: "오늘은 어떤 멤버가 나올지 룰렛에 맡겨 보세요.", page: "roll", kind: "explore" },
+            { title: "오늘의 추천곡 듣기", text: "날짜 기반 오늘의 스텔라이브 추천을 확인해 보세요.", page: "today", kind: "music" },
+            { title: "보관함에 콘텐츠 저장하기", text: "마음에 드는 멤버·노래·영상 중 하나를 저장해 보세요.", page: "hub", kind: "explore" },
+            { title: "멤버 두 명 비교하기", text: "콘텐츠 성향이 다른 두 멤버를 나란히 살펴보세요.", page: "hub", kind: "explore" }
+        ];
+
         /*
          * 대표곡은 해당 멤버가 부른 것으로 확인된 영상만 고정 연결합니다.
          * 후야는 고정 ID 대신, 검증된 커버 데이터에서 자동으로 골라
@@ -1402,13 +1995,38 @@
            APP STATE & SHARED HELPERS
         ========================================================= */
         const storageKey = "stellive-fan-space";
-        const state = JSON.parse(localStorage.getItem(storageKey) || "{}");
+        let state;
+
+        try {
+            state = JSON.parse(localStorage.getItem(storageKey) || "{}");
+        } catch (error) {
+            state = {};
+        }
+
         state.card = state.card || {};
-        state.stats = state.stats || {
+        state.stats = {
             playlistSaves: 0,
             rouletteSpins: 0,
-            completedTests: 0
+            completedTests: 0,
+            missionDays: 0,
+            ...state.stats
         };
+        state.library = state.library || {
+            members: [],
+            songs: [],
+            videos: []
+        };
+        state.activity = {
+            music: 0,
+            game: 0,
+            talk: 0,
+            ...state.activity
+        };
+        state.discoveredMembers = Array.isArray(state.discoveredMembers)
+            ? state.discoveredMembers
+            : [];
+        state.missions = state.missions || {};
+        state.history = Array.isArray(state.history) ? state.history : [];
 
         const $ = (selector) => document.querySelector(selector);
 
@@ -1454,11 +2072,66 @@
             };
         }
 
+        function recordMemberDiscovery(memberIndex) {
+            if (!Number.isInteger(memberIndex)) return;
+
+            if (!state.discoveredMembers.includes(memberIndex)) {
+                state.discoveredMembers.push(memberIndex);
+            }
+        }
+
+        function recordActivity(kind) {
+            if (!["music", "game", "talk"].includes(kind)) return;
+            state.activity[kind] = (state.activity[kind] || 0) + 1;
+        }
+
+        function recordHistory(entry) {
+            state.history.unshift({
+                ...entry,
+                openedAt: new Date().toISOString()
+            });
+            state.history = state.history.slice(0, 30);
+        }
+
         function openMemberLatestVideos(memberIndex) {
+            recordMemberDiscovery(memberIndex);
+            recordActivity(memberCatalogData[memberIndex].focus);
+            recordHistory({
+                type: "member",
+                memberIndex,
+                title: members[memberIndex] + " 최신 영상"
+            });
+            saveState();
             window.open(memberVideoPages[memberIndex], "_blank", "noopener");
         }
 
-        function openVideo(videoId) {
+        function openVideo(videoId, memberIndex, activityKind) {
+            const song = songs.find((item) => item.id === videoId);
+            const catalogVideo = memberCatalogData
+                .flatMap((member, index) => [
+                    { ...member.topSong, memberIndex: index, kind: "music" },
+                    { ...member.topVideo, memberIndex: index, kind: member.focus }
+                ])
+                .find((item) => item.id === videoId);
+            const resolvedMemberIndex = Number.isInteger(memberIndex)
+                ? memberIndex
+                : song
+                    ? song.memberIndex
+                    : catalogVideo
+                        ? catalogVideo.memberIndex
+                        : undefined;
+            const resolvedKind = activityKind || (song ? "music" : catalogVideo ? catalogVideo.kind : "explore");
+
+            recordMemberDiscovery(resolvedMemberIndex);
+            recordActivity(resolvedKind);
+            recordHistory({
+                type: resolvedKind === "music" ? "song" : "video",
+                memberIndex: resolvedMemberIndex,
+                videoId,
+                title: song ? song.title : catalogVideo ? catalogVideo.title : "YouTube 영상"
+            });
+            saveState();
+
             window.open(
                 "https://www.youtube.com/watch?v=" + videoId,
                 "_blank",
@@ -1492,6 +2165,10 @@
             if (pageId === "fan") {
                 renderFanCard();
             }
+
+            if (pageId === "hub") {
+                renderFanHub();
+            }
         }
 
         document.querySelectorAll("[data-page], [data-go]").forEach((button) => {
@@ -1522,7 +2199,7 @@
 
             const saveButton = document.createElement("button");
             saveButton.className = "button";
-            saveButton.textContent = "♡ 카드에 추가";
+            saveButton.textContent = "♡ 팬카드";
             saveButton.addEventListener("click", () => {
                 state.favoriteSong = song;
                 state.favoriteMemberIndex = song.memberIndex;
@@ -1531,10 +2208,22 @@
                 state.stats.playlistSaves += 1;
                 saveState();
                 renderFanCard();
-                alert("팬 카드에 추가했습니다.");
+                alert("팬카드에 추가했습니다.");
             });
 
-            card.append(metadata, listenButton, saveButton);
+            const libraryButton = document.createElement("button");
+            libraryButton.className = "button";
+            libraryButton.textContent = isLibrarySaved("songs", song.id)
+                ? "✓ 보관됨"
+                : "＋ 보관함";
+            libraryButton.addEventListener("click", () => {
+                toggleLibrary("songs", song);
+                libraryButton.textContent = isLibrarySaved("songs", song.id)
+                    ? "✓ 보관됨"
+                    : "＋ 보관함";
+            });
+
+            card.append(metadata, listenButton, saveButton, libraryButton);
             return card;
         }
 
@@ -1635,6 +2324,9 @@
             const song = today.song;
 
             $("#todayDate").textContent = today.dateKey + " TODAY";
+            $("#saveTodaySong").textContent = isLibrarySaved("songs", song.id)
+                ? "✓ 노래 보관됨"
+                : "♡ 노래 보관";
             container.innerHTML = "";
 
             const member = document.createElement("div");
@@ -1668,6 +2360,13 @@
         }
 
         $("#showToday").addEventListener("click", renderToday);
+        $("#saveTodaySong").addEventListener("click", () => {
+            const today = getTodayRecommendation();
+            toggleLibrary("songs", today.song);
+            $("#saveTodaySong").textContent = isLibrarySaved("songs", today.song.id)
+                ? "✓ 노래 보관됨"
+                : "♡ 노래 보관";
+        });
 
         /* =========================================================
            ROULETTE — center angle and pointer target share the
@@ -1714,6 +2413,8 @@
                 state.favoriteMemberIndex = winnerIndex;
                 state.card.favoriteMemberIndex = winnerIndex;
                 state.stats.rouletteSpins += 1;
+                recordMemberDiscovery(winnerIndex);
+                recordActivity(memberCatalogData[winnerIndex].focus);
                 state.rouletteRecommendation = {
                     memberIndex: winnerIndex,
                     title: recommendation.title,
@@ -1730,6 +2431,8 @@
                     <div class="roulette-actions">
                         <button class="button" id="openLatestVideo">📺 최신 영상 보기</button>
                         <button class="button button-primary" id="openMemberCover">🎵 ${recommendation.title} 듣기</button>
+                        <button class="button" id="saveRouletteMember">♡ 멤버 보관</button>
+                        <button class="button" id="saveRouletteImage">🖼️ 결과 이미지</button>
                     </div>
                     <button class="button" id="spinAgain">다시 돌리기</button>
                 `;
@@ -1739,7 +2442,19 @@
                 });
 
                 $("#openMemberCover").addEventListener("click", () => {
-                    openVideo(recommendation.videoId);
+                    openVideo(recommendation.videoId, winnerIndex, "music");
+                });
+
+                $("#saveRouletteMember").addEventListener("click", () => {
+                    toggleLibrary("members", winnerIndex);
+                    $("#saveRouletteMember").textContent =
+                        isLibrarySaved("members", winnerIndex)
+                            ? "✓ 멤버 보관됨"
+                            : "♡ 멤버 보관";
+                });
+
+                $("#saveRouletteImage").addEventListener("click", () => {
+                    saveResultImage("roulette");
                 });
 
                 $("#spinAgain").addEventListener("click", spinWheel);
@@ -1747,6 +2462,715 @@
         }
 
         $("#spinWheel").addEventListener("click", spinWheel);
+
+
+        /* =========================================================
+           FAN HUB — library, missions, taste, catalog, compare, search
+        ========================================================= */
+        function isLibrarySaved(type, key) {
+            if (type === "members") {
+                return state.library.members.includes(Number(key));
+            }
+
+            return state.library[type].some((item) => item.id === key);
+        }
+
+        function toggleLibrary(type, item) {
+            if (type === "members") {
+                const memberIndex = Number(item);
+                const foundIndex = state.library.members.indexOf(memberIndex);
+
+                if (foundIndex >= 0) {
+                    state.library.members.splice(foundIndex, 1);
+                } else {
+                    state.library.members.push(memberIndex);
+                    recordMemberDiscovery(memberIndex);
+                }
+            } else {
+                const foundIndex = state.library[type].findIndex(
+                    (saved) => saved.id === item.id
+                );
+
+                if (foundIndex >= 0) {
+                    state.library[type].splice(foundIndex, 1);
+                } else {
+                    state.library[type].push({ ...item });
+                    recordMemberDiscovery(item.memberIndex);
+                }
+            }
+
+            saveState();
+            renderFanCard();
+
+            if ($("#hub").classList.contains("is-active")) {
+                renderFanHub();
+            }
+        }
+
+        function setFavoriteMember(memberIndex) {
+            state.favoriteMemberIndex = memberIndex;
+            state.card.favoriteMemberIndex = memberIndex;
+            recordMemberDiscovery(memberIndex);
+            saveState();
+            renderFanCard();
+            renderFanHub();
+        }
+
+        function setFavoriteSong(song) {
+            state.favoriteSong = song;
+            state.favoriteMemberIndex = song.memberIndex;
+            state.card.favoriteSongName = song.title;
+            state.card.favoriteMemberIndex = song.memberIndex;
+            saveState();
+            renderFanCard();
+            renderFanHub();
+        }
+
+        function setFavoriteVideo(video) {
+            state.card.favoriteVideoTitle = video.title;
+            state.card.favoriteVideoUrl =
+                "https://www.youtube.com/watch?v=" + video.id;
+            saveState();
+            renderFanCard();
+            renderFanHub();
+        }
+
+        function openChzzk(memberIndex) {
+            recordMemberDiscovery(memberIndex);
+            recordActivity(memberCatalogData[memberIndex].focus);
+            recordHistory({
+                type: "chzzk",
+                memberIndex,
+                title: members[memberIndex] + " 치지직"
+            });
+            saveState();
+            window.open(memberCatalogData[memberIndex].chzzk, "_blank", "noopener");
+        }
+
+        function createEmptyPanel(message) {
+            const empty = document.createElement("div");
+            empty.className = "empty-panel";
+            empty.textContent = message;
+            return empty;
+        }
+
+        function createHubItem(options) {
+            const item = document.createElement("article");
+            item.className = options.className || "library-item";
+
+            const image = options.videoId
+                ? videoThumbnail(options.videoId, options.memberIndex || 0)
+                : new Image();
+
+            if (!options.videoId) {
+                image.src = memberAvatars[options.memberIndex || 0];
+                image.alt = options.title;
+            }
+
+            const copy = document.createElement("div");
+            const title = document.createElement("h4");
+            const meta = document.createElement("p");
+
+            title.textContent = options.title;
+            meta.textContent = options.meta;
+            copy.append(title, meta);
+
+            const actions = document.createElement("div");
+            actions.className = "item-actions";
+            options.actions.forEach((action) => {
+                const button = document.createElement("button");
+                button.className = action.primary
+                    ? "button button-primary"
+                    : "button";
+                button.type = "button";
+                button.textContent = action.label;
+                button.addEventListener("click", action.onClick);
+                actions.append(button);
+            });
+
+            item.append(image, copy, actions);
+            return item;
+        }
+
+        function renderHubSummary() {
+            const summary = $("#hubSummary");
+            const streak = getMissionStreak();
+            const items = [
+                ["보관한 콘텐츠", state.library.members.length + state.library.songs.length + state.library.videos.length],
+                ["도감 발견", state.discoveredMembers.length + " / " + members.length],
+                ["연속 미션", streak + "일"],
+                ["시청 기록", state.history.length]
+            ];
+
+            summary.innerHTML = "";
+            items.forEach(([label, value]) => {
+                const tile = document.createElement("div");
+                tile.className = "summary-tile";
+                const name = document.createElement("span");
+                const number = document.createElement("strong");
+                name.textContent = label;
+                number.textContent = value;
+                tile.append(name, number);
+                summary.append(tile);
+            });
+        }
+
+        function getDailyMission() {
+            const dateKey = getDateKey();
+            const random = seededRandom(dateKey + "-fan-mission");
+            const index = Math.floor(random() * dailyMissionTemplates.length);
+
+            return {
+                dateKey,
+                ...dailyMissionTemplates[index]
+            };
+        }
+
+        function getDateKeyFromDate(date) {
+            return [
+                date.getFullYear(),
+                String(date.getMonth() + 1).padStart(2, "0"),
+                String(date.getDate()).padStart(2, "0")
+            ].join("-");
+        }
+
+        function getMissionStreak() {
+            let cursor = new Date();
+            let streak = 0;
+            const todayKey = getDateKeyFromDate(cursor);
+
+            if (!state.missions[todayKey]) {
+                cursor.setDate(cursor.getDate() - 1);
+            }
+
+            while (state.missions[getDateKeyFromDate(cursor)]) {
+                streak += 1;
+                cursor.setDate(cursor.getDate() - 1);
+            }
+
+            return streak;
+        }
+
+        function renderDailyMission() {
+            const mission = getDailyMission();
+            const completed = Boolean(state.missions[mission.dateKey]);
+            const container = $("#dailyMission");
+
+            container.innerHTML = "";
+
+            const title = document.createElement("h4");
+            title.textContent = (completed ? "✅ " : "🌟 ") + mission.title;
+
+            const text = document.createElement("p");
+            text.className = "muted";
+            text.textContent = mission.text;
+
+            const actions = document.createElement("div");
+            actions.className = "mission-actions";
+
+            const go = document.createElement("button");
+            go.className = "button";
+            go.type = "button";
+            go.textContent = "미션 하러 가기";
+            go.addEventListener("click", () => showPage(mission.page));
+
+            const complete = document.createElement("button");
+            complete.className = completed
+                ? "button"
+                : "button button-primary";
+            complete.type = "button";
+            complete.textContent = completed ? "완료 취소" : "오늘 미션 완료";
+            complete.addEventListener("click", () => {
+                state.missions[mission.dateKey] = !completed;
+                state.stats.missionDays = Object.values(state.missions)
+                    .filter(Boolean).length;
+                saveState();
+                renderFanHub();
+                renderFanCard();
+            });
+
+            actions.append(go, complete);
+            container.append(title, text, actions);
+        }
+
+        function getTasteAnalysis() {
+            const counts = {
+                music: state.activity.music || 0,
+                game: state.activity.game || 0,
+                talk: state.activity.talk || 0
+            };
+            const total = counts.music + counts.game + counts.talk;
+            const labels = {
+                music: "음악 중심",
+                game: "게임·도전",
+                talk: "잡담·합방"
+            };
+            const best = Object.keys(counts)
+                .sort((a, b) => counts[b] - counts[a])[0];
+
+            return {
+                counts,
+                total,
+                best,
+                bestLabel: total ? labels[best] : "탐색을 시작해 보세요",
+                percentages: Object.fromEntries(
+                    Object.entries(counts).map(([key, value]) => [
+                        key,
+                        total ? Math.round((value / total) * 100) : 0
+                    ])
+                )
+            };
+        }
+
+        function renderTasteAnalysis() {
+            const analysis = getTasteAnalysis();
+            const labels = {
+                music: "🎵 음악",
+                game: "🎮 게임",
+                talk: "💬 잡담"
+            };
+            const bars = $("#tasteBars");
+
+            bars.innerHTML = "";
+            Object.keys(labels).forEach((key) => {
+                const row = document.createElement("div");
+                row.className = "taste-row";
+
+                const label = document.createElement("span");
+                label.textContent = labels[key];
+
+                const track = document.createElement("div");
+                track.className = "taste-track";
+                const value = document.createElement("div");
+                value.className = "taste-value";
+                value.style.width = analysis.percentages[key] + "%";
+                track.append(value);
+
+                const percent = document.createElement("strong");
+                percent.textContent = analysis.percentages[key] + "%";
+
+                row.append(label, track, percent);
+                bars.append(row);
+            });
+
+            $("#tasteSummary").innerHTML =
+                "<strong>" + analysis.bestLabel + "</strong>" +
+                "<span class='muted'>사이트 안에서 연 콘텐츠 " +
+                analysis.total + "개 기준</span>";
+        }
+
+
+        function renderRecentHistory() {
+            const container = $("#recentHistory");
+            container.innerHTML = "";
+
+            if (!state.history.length) {
+                container.append(createEmptyPanel("아직 시청 기록이 없어요."));
+                return;
+            }
+
+            state.history.slice(0, 10).forEach((entry) => {
+                const memberIndex = Number.isInteger(entry.memberIndex)
+                    ? entry.memberIndex
+                    : 0;
+                const actions = [];
+
+                if (entry.videoId) {
+                    actions.push({
+                        label: "다시 보기",
+                        onClick: () => openVideo(
+                            entry.videoId,
+                            memberIndex,
+                            entry.type === "song"
+                                ? "music"
+                                : memberCatalogData[memberIndex].focus
+                        )
+                    });
+                } else if (entry.type === "chzzk") {
+                    actions.push({
+                        label: "다시 열기",
+                        onClick: () => openChzzk(memberIndex)
+                    });
+                } else {
+                    actions.push({
+                        label: "다시 열기",
+                        onClick: () => openMemberLatestVideos(memberIndex)
+                    });
+                }
+
+                container.append(createHubItem({
+                    className: "search-item",
+                    title: entry.title,
+                    meta: members[memberIndex] + " · " +
+                        new Date(entry.openedAt).toLocaleString("ko-KR"),
+                    memberIndex,
+                    videoId: entry.videoId,
+                    actions
+                }));
+            });
+        }
+
+        function renderLibrary() {
+            const memberBox = $("#memberLibrary");
+            const songBox = $("#songLibrary");
+            const videoBox = $("#videoLibrary");
+
+            memberBox.innerHTML = "";
+            songBox.innerHTML = "";
+            videoBox.innerHTML = "";
+
+            if (!state.library.members.length) {
+                memberBox.append(createEmptyPanel("저장한 멤버가 없어요."));
+            }
+
+            state.library.members.forEach((memberIndex) => {
+                memberBox.append(createHubItem({
+                    title: members[memberIndex],
+                    meta: memberCatalogData[memberIndex].focusLabel,
+                    memberIndex,
+                    actions: [
+                        { label: "최애 설정", primary: true, onClick: () => setFavoriteMember(memberIndex) },
+                        { label: "삭제", onClick: () => toggleLibrary("members", memberIndex) }
+                    ]
+                }));
+            });
+
+            if (!state.library.songs.length) {
+                songBox.append(createEmptyPanel("저장한 노래가 없어요."));
+            }
+
+            state.library.songs.forEach((song) => {
+                songBox.append(createHubItem({
+                    title: song.title,
+                    meta: members[song.memberIndex] + " · " + (song.type || "노래"),
+                    memberIndex: song.memberIndex,
+                    videoId: song.id,
+                    actions: [
+                        { label: "듣기", onClick: () => openVideo(song.id, song.memberIndex, "music") },
+                        { label: "팬카드", primary: true, onClick: () => setFavoriteSong(song) },
+                        { label: "삭제", onClick: () => toggleLibrary("songs", song) }
+                    ]
+                }));
+            });
+
+            if (!state.library.videos.length) {
+                videoBox.append(createEmptyPanel("저장한 영상이 없어요."));
+            }
+
+            state.library.videos.forEach((video) => {
+                videoBox.append(createHubItem({
+                    title: video.title,
+                    meta: members[video.memberIndex] + " · 일반 영상",
+                    memberIndex: video.memberIndex,
+                    videoId: video.id,
+                    actions: [
+                        {
+                            label: "보기",
+                            onClick: () => openVideo(
+                                video.id,
+                                video.memberIndex,
+                                memberCatalogData[video.memberIndex].focus
+                            )
+                        },
+                        { label: "팬카드", primary: true, onClick: () => setFavoriteVideo(video) },
+                        { label: "삭제", onClick: () => toggleLibrary("videos", video) }
+                    ]
+                }));
+            });
+        }
+
+        function renderMemberCatalog() {
+            const grid = $("#memberCatalog");
+            grid.innerHTML = "";
+
+            $("#catalogProgress").textContent =
+                "도감 진행도 " + state.discoveredMembers.length +
+                " / " + members.length;
+
+            members.forEach((memberName, memberIndex) => {
+                const info = memberCatalogData[memberIndex];
+                const discovered = state.discoveredMembers.includes(memberIndex);
+                const card = document.createElement("article");
+                card.className = "card catalog-card" +
+                    (discovered ? " is-discovered" : "");
+
+                const image = new Image();
+                image.src = memberAvatars[memberIndex];
+                image.alt = memberName + " 프로필";
+
+                const copy = document.createElement("div");
+                const title = document.createElement("h4");
+                const description = document.createElement("p");
+                const tags = document.createElement("p");
+
+                title.textContent = (discovered ? "✓ " : "☆ ") + memberName;
+                description.className = "muted";
+                description.textContent = info.description;
+                tags.textContent = info.focusLabel + " · " + info.tags.join(" · ");
+                copy.append(title, description, tags);
+
+                const actions = document.createElement("div");
+                actions.className = "item-actions";
+                const actionData = [
+                    ["인기 영상", () => openVideo(info.topVideo.id, memberIndex, info.focus)],
+                    ["대표 노래", () => openVideo(info.topSong.id, memberIndex, "music")],
+                    ["YouTube", () => openMemberLatestVideos(memberIndex)],
+                    ["치지직", () => openChzzk(memberIndex)],
+                    [
+                        isLibrarySaved("members", memberIndex) ? "멤버 보관 해제" : "멤버 보관",
+                        () => toggleLibrary("members", memberIndex)
+                    ]
+                ];
+
+                actionData.forEach(([label, handler], actionIndex) => {
+                    const button = document.createElement("button");
+                    button.className = actionIndex === 1
+                        ? "button button-primary"
+                        : "button";
+                    button.type = "button";
+                    button.textContent = label;
+                    button.addEventListener("click", handler);
+                    actions.append(button);
+                });
+
+                card.append(image, copy, actions);
+                grid.append(card);
+            });
+        }
+
+        function fillCompareSelects() {
+            const first = $("#compareMemberA");
+            const second = $("#compareMemberB");
+
+            if (first.options.length) return;
+
+            members.forEach((memberName, index) => {
+                const optionA = document.createElement("option");
+                optionA.value = String(index);
+                optionA.textContent = memberName;
+                first.append(optionA);
+
+                const optionB = optionA.cloneNode(true);
+                optionB.selected = index === 1;
+                second.append(optionB);
+            });
+        }
+
+        function createCompareCard(memberIndex) {
+            const info = memberCatalogData[memberIndex];
+            const card = document.createElement("article");
+            card.className = "compare-card";
+
+            const image = new Image();
+            image.src = memberAvatars[memberIndex];
+            image.alt = members[memberIndex] + " 프로필";
+
+            const title = document.createElement("h4");
+            title.textContent = members[memberIndex];
+
+            const list = document.createElement("dl");
+            [
+                ["중심 콘텐츠", info.focusLabel],
+                ["키워드", info.tags.join(" · ")],
+                ["인기 노래", info.topSong.title],
+                ["인기 영상", info.topVideo.title]
+            ].forEach(([term, value]) => {
+                const dt = document.createElement("dt");
+                const dd = document.createElement("dd");
+                dt.textContent = term;
+                dd.textContent = value;
+                list.append(dt, dd);
+            });
+
+            const actions = document.createElement("div");
+            actions.className = "item-actions";
+            [
+                ["노래 듣기", () => openVideo(info.topSong.id, memberIndex, "music")],
+                ["영상 보기", () => openVideo(info.topVideo.id, memberIndex, info.focus)],
+                ["치지직", () => openChzzk(memberIndex)]
+            ].forEach(([label, handler]) => {
+                const button = document.createElement("button");
+                button.className = "button";
+                button.type = "button";
+                button.textContent = label;
+                button.addEventListener("click", handler);
+                actions.append(button);
+            });
+
+            card.append(image, title, list, actions);
+            return card;
+        }
+
+        function renderMemberComparison() {
+            const firstIndex = Number($("#compareMemberA").value);
+            const secondIndex = Number($("#compareMemberB").value);
+            const result = $("#compareResult");
+
+            result.innerHTML = "";
+
+            if (firstIndex === secondIndex) {
+                result.append(createEmptyPanel("서로 다른 두 멤버를 선택해 주세요."));
+                return;
+            }
+
+            result.append(
+                createCompareCard(firstIndex),
+                createCompareCard(secondIndex)
+            );
+        }
+
+        function getSearchEntries() {
+            const memberEntries = members.map((memberName, memberIndex) => ({
+                kind: "member",
+                title: memberName,
+                meta: memberCatalogData[memberIndex].focusLabel +
+                    " · " + memberCatalogData[memberIndex].tags.join(" · "),
+                memberIndex
+            }));
+            const topSongEntries = memberCatalogData.map((info, memberIndex) => ({
+                kind: "song",
+                title: info.topSong.title,
+                meta: members[memberIndex] + " · 인기 노래 · 조회수 " + info.topSong.views,
+                memberIndex,
+                id: info.topSong.id,
+                type: "인기 노래"
+            }));
+            const songEntries = songs.map((song) => ({
+                kind: "song",
+                title: song.title,
+                meta: members[song.memberIndex] + " · " + song.type,
+                memberIndex: song.memberIndex,
+                id: song.id,
+                type: song.type
+            }));
+            const videoEntries = memberCatalogData.map((info, memberIndex) => ({
+                kind: "video",
+                title: info.topVideo.title,
+                meta: members[memberIndex] + " · 인기 일반 영상 · 조회수 " + info.topVideo.views,
+                memberIndex,
+                id: info.topVideo.id
+            }));
+
+            return [...memberEntries, ...topSongEntries, ...songEntries, ...videoEntries];
+        }
+
+        function renderCatalogSearch() {
+            const query = $("#catalogSearch").value.trim().toLocaleLowerCase("ko");
+            const filter = $("#catalogFilter").value;
+            const container = $("#catalogSearchResults");
+
+            container.innerHTML = "";
+
+            if (!query) {
+                container.append(createEmptyPanel("검색어를 입력하면 결과가 여기에 표시됩니다."));
+                return;
+            }
+
+            const results = getSearchEntries()
+                .filter((entry) => {
+                    if (filter === "all") return true;
+                    if (filter === "member" || filter === "song" || filter === "video") {
+                        return entry.kind === filter;
+                    }
+                    if (filter === "cover") {
+                        return entry.kind === "song" && entry.type === "커버곡";
+                    }
+                    if (filter === "original") {
+                        return entry.kind === "song" && entry.type === "오리지널곡";
+                    }
+                    if (filter === "game" || filter === "talk") {
+                        return memberCatalogData[entry.memberIndex].focus === filter;
+                    }
+                    return true;
+                })
+                .filter((entry) => {
+                    const searchable = [
+                        entry.title,
+                        entry.meta,
+                        members[entry.memberIndex]
+                    ].join(" ").toLocaleLowerCase("ko");
+                    return searchable.includes(query);
+                })
+                .slice(0, 40);
+
+            if (!results.length) {
+                container.append(createEmptyPanel("일치하는 결과가 없습니다."));
+                return;
+            }
+
+            results.forEach((entry) => {
+                const libraryType = entry.kind === "song" ? "songs" : "videos";
+                const actions = [];
+
+                if (entry.kind === "member") {
+                    actions.push(
+                        { label: "채널 보기", onClick: () => openMemberLatestVideos(entry.memberIndex) },
+                        {
+                            label: isLibrarySaved("members", entry.memberIndex) ? "보관 해제" : "보관",
+                            primary: true,
+                            onClick: () => toggleLibrary("members", entry.memberIndex)
+                        }
+                    );
+                } else {
+                    actions.push(
+                        {
+                            label: entry.kind === "song" ? "듣기" : "보기",
+                            onClick: () => openVideo(
+                                entry.id,
+                                entry.memberIndex,
+                                entry.kind === "song"
+                                    ? "music"
+                                    : memberCatalogData[entry.memberIndex].focus
+                            )
+                        },
+                        {
+                            label: isLibrarySaved(libraryType, entry.id) ? "보관 해제" : "보관",
+                            primary: true,
+                            onClick: () => toggleLibrary(libraryType, {
+                                id: entry.id,
+                                title: entry.title,
+                                memberIndex: entry.memberIndex,
+                                type: entry.type
+                            })
+                        }
+                    );
+                }
+
+                container.append(createHubItem({
+                    className: "search-item",
+                    title: entry.title,
+                    meta: entry.meta,
+                    memberIndex: entry.memberIndex,
+                    videoId: entry.id,
+                    actions
+                }));
+            });
+        }
+
+        function renderFanHub() {
+            fillCompareSelects();
+            renderHubSummary();
+            renderDailyMission();
+            renderTasteAnalysis();
+            renderRecentHistory();
+            renderLibrary();
+            renderMemberCatalog();
+            renderMemberComparison();
+
+            if (!$("#catalogSearch").value.trim()) {
+                renderCatalogSearch();
+            }
+        }
+
+        $("#runCatalogSearch").addEventListener("click", renderCatalogSearch);
+        $("#catalogSearch").addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                renderCatalogSearch();
+            }
+        });
+        $("#catalogFilter").addEventListener("change", renderCatalogSearch);
+        $("#compareMembers").addEventListener("click", renderMemberComparison);
 
         /* =========================================================
            20-QUESTION COMPATIBILITY TEST
@@ -1877,7 +3301,10 @@
                     </div>
                 </article>
 
-                <button class="button" id="restartQuiz">테스트 다시 하기</button>
+                <div class="fan-card-actions">
+                    <button class="button" id="restartQuiz">테스트 다시 하기</button>
+                    <button class="button button-primary" id="saveMatchImage">🖼️ 결과 이미지</button>
+                </div>
             `;
 
             const axisList = $("#axisList");
@@ -1908,7 +3335,12 @@
                 thumbnail.src = fallback;
             };
 
-            $("#playRecommended").addEventListener("click", () => openVideo(recommendation.videoId));
+            $("#playRecommended").addEventListener("click", () => {
+                openVideo(recommendation.videoId, bestMemberIndex, "music");
+            });
+            $("#saveMatchImage").addEventListener("click", () => {
+                saveResultImage("compatibility");
+            });
             $("#restartQuiz").addEventListener("click", restartQuiz);
             renderFanCard();
         }
@@ -1941,6 +3373,216 @@
             renderQuestion();
         });
 
+
+        /* =========================================================
+           SHAREABLE RESULT IMAGES
+        ========================================================= */
+        function wrapCanvasText(context, text, x, y, maxWidth, lineHeight, maxLines) {
+            const characters = Array.from(String(text));
+            const lines = [];
+            let line = "";
+
+            characters.forEach((character) => {
+                const testLine = line + character;
+
+                if (context.measureText(testLine).width > maxWidth && line) {
+                    lines.push(line);
+                    line = character;
+                } else {
+                    line = testLine;
+                }
+            });
+
+            if (line) lines.push(line);
+
+            lines.slice(0, maxLines).forEach((value, index) => {
+                let output = value;
+
+                if (index === maxLines - 1 && lines.length > maxLines) {
+                    while (context.measureText(output + "…").width > maxWidth) {
+                        output = output.slice(0, -1);
+                    }
+                    output += "…";
+                }
+
+                context.fillText(output, x, y + index * lineHeight);
+            });
+
+            return y + Math.min(lines.length, maxLines) * lineHeight;
+        }
+
+        function makeResultCanvas(title, subtitle, rows, accent) {
+            const canvas = document.createElement("canvas");
+            canvas.width = 1200;
+            canvas.height = 675;
+            const context = canvas.getContext("2d");
+            const gradient = context.createLinearGradient(0, 0, 1200, 675);
+
+            gradient.addColorStop(0, "#080b20");
+            gradient.addColorStop(0.55, "#19164a");
+            gradient.addColorStop(1, accent || "#234e68");
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "rgba(255,255,255,0.05)";
+            for (let index = 0; index < 55; index += 1) {
+                const x = (index * 193) % canvas.width;
+                const y = (index * 107) % canvas.height;
+                context.beginPath();
+                context.arc(x, y, index % 3 + 1, 0, Math.PI * 2);
+                context.fill();
+            }
+
+            context.fillStyle = "rgba(8,11,32,0.62)";
+            context.strokeStyle = "rgba(255,255,255,0.18)";
+            context.lineWidth = 2;
+            context.beginPath();
+            context.roundRect(70, 58, 1060, 559, 36);
+            context.fill();
+            context.stroke();
+
+            context.fillStyle = "#79d7ff";
+            context.font = "800 24px Pretendard, sans-serif";
+            context.fillText("STELLIVE FAN SPACE", 120, 120);
+
+            context.fillStyle = "#ffffff";
+            context.font = "900 54px Pretendard, sans-serif";
+            const titleBottom = wrapCanvasText(
+                context,
+                title,
+                120,
+                194,
+                940,
+                62,
+                2
+            );
+
+            context.fillStyle = "#c4cae5";
+            context.font = "500 24px Pretendard, sans-serif";
+            const subtitleBottom = wrapCanvasText(
+                context,
+                subtitle,
+                120,
+                titleBottom + 10,
+                940,
+                34,
+                2
+            );
+
+            let rowY = subtitleBottom + 34;
+            rows.slice(0, 5).forEach(([label, value]) => {
+                context.fillStyle = "#9f96ff";
+                context.font = "800 22px Pretendard, sans-serif";
+                context.fillText(label, 120, rowY);
+
+                context.fillStyle = "#ffffff";
+                context.font = "700 25px Pretendard, sans-serif";
+                wrapCanvasText(context, value, 350, rowY, 710, 31, 1);
+                rowY += 60;
+            });
+
+            context.fillStyle = "#9ca6c9";
+            context.font = "500 18px Pretendard, sans-serif";
+            context.fillText("stellivefan · " + getDateKey(), 120, 575);
+            return canvas;
+        }
+
+        function downloadCanvas(canvas, fileName) {
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    alert("이미지를 만들지 못했습니다.");
+                    return;
+                }
+
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = fileName;
+                link.click();
+                window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+            }, "image/png");
+        }
+
+        function saveResultImage(type) {
+            let title;
+            let subtitle;
+            let rows;
+            let fileName;
+            let accent = "#234e68";
+
+            if (type === "today") {
+                const today = getTodayRecommendation();
+                title = "오늘의 STELLIVE";
+                subtitle = today.dateKey + " 날짜 키 추천";
+                rows = [
+                    ["오늘의 멤버", members[today.memberIndex]],
+                    ["오늘의 노래", today.song.title],
+                    ["곡 종류", today.song.type]
+                ];
+                fileName = "stellive-today-" + today.dateKey + ".png";
+            } else if (type === "roulette") {
+                const result = state.rouletteRecommendation;
+
+                if (!result) {
+                    alert("먼저 룰렛을 돌려 주세요.");
+                    return;
+                }
+
+                title = "룰렛 결과";
+                subtitle = "오늘 룰렛이 선택한 멤버";
+                rows = [
+                    ["당첨 멤버", members[result.memberIndex]],
+                    ["추천 노래", result.title],
+                    ["바로 듣기", "youtube.com/watch?v=" + result.videoId]
+                ];
+                fileName = "stellive-roulette.png";
+                accent = "#57305f";
+            } else if (type === "compatibility") {
+                const result = state.compatibility;
+
+                if (!result) {
+                    alert("먼저 궁합 테스트를 완료해 주세요.");
+                    return;
+                }
+
+                title = "스텔라이브 궁합 테스트";
+                subtitle = "20문항 성향 분석 결과";
+                rows = [
+                    ["궁합 멤버", members[result.memberIndex]],
+                    ["궁합 점수", result.score + "점"],
+                    ["추천 노래", result.songTitle],
+                    ["강한 성향", topAxisTags(result.axes).join(" · ")]
+                ];
+                fileName = "stellive-compatibility.png";
+                accent = "#603c68";
+            } else {
+                const card = getDisplayedFanData();
+                const compatibility = state.compatibility;
+                const taste = getTasteAnalysis();
+
+                title = card.name;
+                subtitle = card.title;
+                rows = [
+                    ["최애", Number.isInteger(card.favoriteMemberIndex) ? members[card.favoriteMemberIndex] : "미설정"],
+                    ["최애곡", card.favoriteSongName || "미설정"],
+                    ["나의 취향", taste.bestLabel],
+                    ["궁합 멤버", compatibility ? members[compatibility.memberIndex] + " · " + compatibility.score + "점" : "테스트 전"],
+                    ["미션 연속", getMissionStreak() + "일"]
+                ];
+                fileName = "stellive-fan-card.png";
+                accent = card.theme === "rose" ? "#6a294f" : card.theme === "aurora" ? "#15534e" : "#34276c";
+            }
+
+            downloadCanvas(
+                makeResultCanvas(title, subtitle, rows, accent),
+                fileName
+            );
+        }
+
+        $("#saveTodayImage").addEventListener("click", () => {
+            saveResultImage("today");
+        });
+
         /* =========================================================
            FAN CARD — editable personal fields, locked test result
         ========================================================= */
@@ -1951,11 +3593,18 @@
 
         function getFanBadges() {
             const badges = [];
+            const libraryCount =
+                state.library.members.length +
+                state.library.songs.length +
+                state.library.videos.length;
 
             if (state.stats.playlistSaves > 0) badges.push("🎧 Playlist Maker");
             if (state.stats.rouletteSpins >= 3) badges.push("🎡 Lucky Spinner");
             if (state.stats.completedTests > 0) badges.push("💫 Analyzer");
             if (state.stats.playlistSaves >= 5) badges.push("🌟 Music Explorer");
+            if (libraryCount >= 5) badges.push("💜 Collector");
+            if (state.discoveredMembers.length === members.length) badges.push("🌌 All Members");
+            if (getMissionStreak() >= 3) badges.push("🔥 Mission Streak");
 
             return badges.length ? badges : ["🌱 New Fan"];
         }
@@ -1982,8 +3631,13 @@
 
             return {
                 name: getCardValue("name", "FAN #STEL"),
+                title: getCardValue("title", "STELLIVE FAN CARD"),
+                theme: getCardValue("theme", "cosmic"),
+                frame: getCardValue("frame", "soft"),
                 favoriteMemberIndex: getCardValue("favoriteMemberIndex", state.favoriteMemberIndex),
                 favoriteSongName: getCardValue("favoriteSongName", state.favoriteSong ? state.favoriteSong.title : ""),
+                favoriteVideoTitle: getCardValue("favoriteVideoTitle", ""),
+                favoriteVideoUrl: getCardValue("favoriteVideoUrl", ""),
                 todayMemberIndex: getCardValue("todayMemberIndex", autoTodayIndex),
                 favoriteContent: getCardValue("favoriteContent", ""),
                 intro: getCardValue("intro", "나만의 스텔라이브 팬 프로필")
@@ -1995,14 +3649,31 @@
             const compatibility = state.compatibility;
             const badges = getFanBadges();
 
+            const taste = getTasteAnalysis();
+            const cardElement = $("#fanCard");
+
+            cardElement.className =
+                "fan-card theme-" + card.theme + " frame-" + card.frame;
+            $("#fanCardTitle").textContent = card.title;
             $("#fanName").textContent = card.name;
             $("#fanIntro").textContent = card.intro;
-            $("#fanFavorite").textContent =
-                card.favoriteMemberIndex === undefined ? "아직 선택 안 함" : members[card.favoriteMemberIndex];
+            $("#fanFavorite").textContent = Number.isInteger(card.favoriteMemberIndex)
+                ? members[card.favoriteMemberIndex]
+                : "아직 선택 안 함";
             $("#fanSong").textContent = card.favoriteSongName || "아직 선택 안 함";
-            $("#fanToday").textContent =
-                card.todayMemberIndex === undefined ? "오늘의 추천 보기" : members[card.todayMemberIndex];
+            $("#fanToday").textContent = Number.isInteger(card.todayMemberIndex)
+                ? members[card.todayMemberIndex]
+                : "오늘의 추천 보기";
             $("#fanContent").textContent = card.favoriteContent || "아직 선택 안 함";
+            const fanVideo = $("#fanVideo");
+            fanVideo.textContent = card.favoriteVideoTitle || "아직 선택 안 함";
+            fanVideo.href = card.favoriteVideoUrl || "#";
+            fanVideo.style.color = card.favoriteVideoUrl ? "var(--blue)" : "inherit";
+            fanVideo.onclick = (event) => {
+                if (!card.favoriteVideoUrl) event.preventDefault();
+            };
+            $("#fanTaste").textContent = taste.bestLabel;
+            $("#fanStreak").textContent = getMissionStreak() + "일";
             $("#fanMatch").textContent =
                 compatibility ? members[compatibility.memberIndex] : "궁합 테스트를 해 보세요";
             $("#fanScore").textContent = compatibility ? compatibility.score + "점" : "-";
@@ -2022,10 +3693,16 @@
             const compatibility = state.compatibility;
 
             $("#fanNameInput").value = card.name === "FAN #STEL" ? "" : card.name;
+            $("#fanTitleInput").value =
+                card.title === "STELLIVE FAN CARD" ? "" : card.title;
+            $("#fanThemeSelect").value = card.theme;
+            $("#fanFrameSelect").value = card.frame;
             fillMemberSelect($("#fanFavoriteSelect"), card.favoriteMemberIndex, "자동 선택");
             fillMemberSelect($("#fanTodaySelect"), card.todayMemberIndex, "오늘의 자동 추천 사용");
             $("#fanSongInput").value = card.favoriteSongName;
             $("#fanContentInput").value = card.favoriteContent;
+            $("#fanVideoTitleInput").value = card.favoriteVideoTitle;
+            $("#fanVideoUrlInput").value = card.favoriteVideoUrl;
             $("#fanIntroInput").value =
                 card.intro === "나만의 스텔라이브 팬 프로필" ? "" : card.intro;
             $("#lockedMatch").textContent =
@@ -2048,8 +3725,13 @@
             state.card = {
                 ...state.card,
                 name: $("#fanNameInput").value.trim(),
+                title: $("#fanTitleInput").value.trim(),
+                theme: $("#fanThemeSelect").value,
+                frame: $("#fanFrameSelect").value,
                 favoriteMemberIndex: favoriteValue === "" ? null : Number(favoriteValue),
                 favoriteSongName: $("#fanSongInput").value.trim(),
+                favoriteVideoTitle: $("#fanVideoTitleInput").value.trim(),
+                favoriteVideoUrl: $("#fanVideoUrlInput").value.trim(),
                 todayMemberIndex: todayValue === "" ? null : Number(todayValue),
                 favoriteContent: $("#fanContentInput").value.trim(),
                 intro: $("#fanIntroInput").value.trim()
@@ -2075,7 +3757,10 @@
                 "닉네임: " + card.name,
                 "최애: " + (card.favoriteMemberIndex === undefined ? "미설정" : members[card.favoriteMemberIndex]),
                 "최애곡: " + (card.favoriteSongName || "미설정"),
+                "최애 영상: " + (card.favoriteVideoTitle || "미설정"),
                 "좋아하는 콘텐츠: " + (card.favoriteContent || "미설정"),
+                "나의 취향: " + getTasteAnalysis().bestLabel,
+                "미션 연속 달성: " + getMissionStreak() + "일",
                 "궁합 멤버: " + (compatibility ? members[compatibility.memberIndex] : "테스트 전")
             ];
             const text = lines.join("\n");
@@ -2100,6 +3785,9 @@
         $("#cancelFanEdit").addEventListener("click", closeFanCardEditor);
         $("#resetFanEdit").addEventListener("click", resetEditableFanCardFields);
         $("#fanCardEditor").addEventListener("submit", saveFanCardEditor);
+        $("#saveFanCardImage").addEventListener("click", () => {
+            saveResultImage("fan");
+        });
         $("#shareFanCard").addEventListener("click", shareFanCard);
 
         /* =========================================================
@@ -2108,6 +3796,7 @@
         renderToday();
         renderWheel();
         renderQuestion();
+        renderFanHub();
         renderFanCard();
     </script>
 </body>
