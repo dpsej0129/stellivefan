@@ -1645,6 +1645,27 @@
             }))
         ];
 
+
+        /*
+         * 사용자가 지정한 오늘의 추천 영상입니다.
+         * 날짜 키 생성은 유지하고, 2026-09-13에만 이 항목을 우선 적용합니다.
+         */
+        const todayOverrideVideos = [
+            {
+                id: "blFr5w6o2jQ",
+                title: "유즈하 리코 지정 영상",
+                memberIndex: 7,
+                type: "추천 영상"
+            }
+        ];
+
+        const todayRecommendationOverrides = {
+            "2026-09-13": {
+                memberIndex: 7,
+                songId: "blFr5w6o2jQ"
+            }
+        };
+
         /*
          * 20문항은 5개 성향 축을 각기 반복해서 살핍니다.
          * 값은 [활동성, 감성, 음악성, 사교성, 도전성] 순서입니다.
@@ -2204,8 +2225,14 @@
 
             const listenButton = document.createElement("button");
             listenButton.className = "button";
-            listenButton.textContent = "▶ 노래 듣기";
-            listenButton.addEventListener("click", () => openVideo(song.id));
+            listenButton.textContent = "▶ " + (song.type === "추천 영상" ? "영상 보기" : "노래 듣기");
+            listenButton.addEventListener("click", () => openVideo(
+                song.id,
+                song.memberIndex,
+                song.type === "추천 영상"
+                    ? memberCatalogData[song.memberIndex].focus
+                    : "music"
+            ));
 
             const saveButton = document.createElement("button");
             saveButton.className = "button";
@@ -2309,22 +2336,32 @@
 
         function getTodayRecommendation() {
             const dateKey = getDateKey();
+            const override = todayRecommendationOverrides[dateKey];
+            const overrideChanged = override &&
+                (!state.today ||
+                    state.today.dateKey !== dateKey ||
+                    state.today.songId !== override.songId);
 
-            if (!state.today || state.today.dateKey !== dateKey) {
+            if (!state.today || state.today.dateKey !== dateKey || overrideChanged) {
                 const random = seededRandom(dateKey);
-                const song = randomPick(songs, 1, random)[0];
+                const selected = override
+                    ? todayOverrideVideos.find((video) => video.id === override.songId)
+                    : randomPick(songs, 1, random)[0];
 
                 state.today = {
                     dateKey,
-                    songId: song.id,
-                    memberIndex: song.memberIndex
+                    songId: selected.id,
+                    memberIndex: override ? override.memberIndex : selected.memberIndex
                 };
                 saveState();
             }
 
             return {
                 ...state.today,
-                song: songs.find((song) => song.id === state.today.songId) || songs[0]
+                song:
+                    songs.find((song) => song.id === state.today.songId) ||
+                    todayOverrideVideos.find((video) => video.id === state.today.songId) ||
+                    songs[0]
             };
         }
 
@@ -2334,9 +2371,11 @@
             const song = today.song;
 
             $("#todayDate").textContent = today.dateKey + " TODAY";
-            $("#saveTodaySong").textContent = isLibrarySaved("songs", song.id)
-                ? "✓ 노래 보관됨"
-                : "♡ 노래 보관";
+            const todayIsVideo = song.type === "추천 영상";
+            const todayLibraryType = todayIsVideo ? "videos" : "songs";
+            $("#saveTodaySong").textContent = isLibrarySaved(todayLibraryType, song.id)
+                ? "✓ 오늘 콘텐츠 보관됨"
+                : "♡ 오늘 콘텐츠 보관";
             container.innerHTML = "";
 
             const member = document.createElement("div");
@@ -2355,14 +2394,20 @@
 
             const text = document.createElement("div");
             text.innerHTML = `
-                <b>오늘의 노래 · ${song.title}</b>
+                <b>오늘의 ${todayIsVideo ? "영상" : "노래"} · ${song.title}</b>
                 <p class="muted">${members[song.memberIndex]}의 실제 YouTube 영상</p>
             `;
 
             const listenButton = document.createElement("button");
             listenButton.className = "button button-primary";
-            listenButton.textContent = "▶ 노래 듣기";
-            listenButton.addEventListener("click", () => openVideo(song.id));
+            listenButton.textContent = "▶ " + (song.type === "추천 영상" ? "영상 보기" : "노래 듣기");
+            listenButton.addEventListener("click", () => openVideo(
+                song.id,
+                song.memberIndex,
+                song.type === "추천 영상"
+                    ? memberCatalogData[song.memberIndex].focus
+                    : "music"
+            ));
 
             text.append(listenButton);
             songLine.append(text);
@@ -2372,10 +2417,20 @@
         $("#showToday").addEventListener("click", renderToday);
         $("#saveTodaySong").addEventListener("click", () => {
             const today = getTodayRecommendation();
-            toggleLibrary("songs", today.song);
-            $("#saveTodaySong").textContent = isLibrarySaved("songs", today.song.id)
-                ? "✓ 노래 보관됨"
-                : "♡ 노래 보관";
+            const libraryType = today.song.type === "추천 영상" ? "videos" : "songs";
+            const libraryItem = today.song.type === "추천 영상"
+                ? {
+                    id: today.song.id,
+                    title: today.song.title,
+                    memberIndex: today.song.memberIndex
+                }
+                : today.song;
+
+            toggleLibrary(libraryType, libraryItem);
+            $("#saveTodaySong").textContent =
+                isLibrarySaved(libraryType, today.song.id)
+                    ? "✓ 오늘 콘텐츠 보관됨"
+                    : "♡ 오늘 콘텐츠 보관";
         });
 
         /* =========================================================
@@ -3527,8 +3582,8 @@
                 subtitle = today.dateKey + " 날짜 키 추천";
                 rows = [
                     ["오늘의 멤버", members[today.memberIndex]],
-                    ["오늘의 노래", today.song.title],
-                    ["곡 종류", today.song.type]
+                    ["오늘의 " + (today.song.type === "추천 영상" ? "영상" : "노래"), today.song.title],
+                    ["콘텐츠 종류", today.song.type]
                 ];
                 fileName = "stellive-today-" + today.dateKey + ".png";
             } else if (type === "roulette") {
