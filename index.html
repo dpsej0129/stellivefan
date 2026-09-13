@@ -1216,7 +1216,7 @@
                 </button>
                 <button class="card feature-card" data-go="today">
                     <strong>✨ 오늘의 스텔라이브</strong>
-                    <span class="muted">날짜마다 달라지는 오늘의 추천이에요.</span>
+                    <span class="muted">지정한 오늘의 멤버와 영상을 바로 확인해요.</span>
                 </button>
                 <button class="card feature-card" data-go="roll">
                     <strong>🎡 멤버 룰렛</strong>
@@ -1284,7 +1284,7 @@
             <div class="card today-card">
                 <p class="eyebrow" id="todayDate"></p>
                 <h2>오늘의 STELLIVE</h2>
-                <p class="muted">날짜 키를 기준으로 저장하며, 날짜가 바뀌면 새로운 추천을 만듭니다.</p>
+                <p class="muted">날짜 키로 기록하며, 현재 지정된 오늘의 추천을 우선 보여줘요.</p>
                 <div id="todayResult"></div>
                 <div class="fan-card-actions">
                     <button class="button button-primary" id="showToday">오늘의 추천 보기</button>
@@ -1648,7 +1648,7 @@
 
         /*
          * 사용자가 지정한 오늘의 추천 영상입니다.
-         * 날짜 키 생성은 유지하고, 2026-09-13에만 이 항목을 우선 적용합니다.
+         * 날짜 키는 계속 갱신하되, 현재 지정된 항목을 오늘의 추천으로 우선 적용합니다.
          */
         const todayOverrideVideos = [
             {
@@ -1660,7 +1660,7 @@
         ];
 
         const todayRecommendationOverrides = {
-            "2026-09-13": {
+            "*": {
                 memberIndex: 7,
                 songId: "blFr5w6o2jQ"
             }
@@ -2336,7 +2336,8 @@
 
         function getTodayRecommendation() {
             const dateKey = getDateKey();
-            const override = todayRecommendationOverrides[dateKey];
+            const override = todayRecommendationOverrides[dateKey] ||
+                todayRecommendationOverrides["*"];
             const overrideChanged = override &&
                 (!state.today ||
                     state.today.dateKey !== dateKey ||
