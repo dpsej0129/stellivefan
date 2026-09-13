@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="stellive-build" content="2026-09-13-riko-today">
     <title>STELLIVE FAN SPACE</title>
 
     <style>
@@ -1660,7 +1661,7 @@
         ];
 
         const todayRecommendationOverrides = {
-            "*": {
+            "2026-09-13": {
                 memberIndex: 7,
                 songId: "blFr5w6o2jQ"
             }
@@ -2336,8 +2337,7 @@
 
         function getTodayRecommendation() {
             const dateKey = getDateKey();
-            const override = todayRecommendationOverrides[dateKey] ||
-                todayRecommendationOverrides["*"];
+            const override = todayRecommendationOverrides[dateKey];
 
             if (override) {
                 const selected = todayOverrideVideos.find(
@@ -3711,8 +3711,7 @@
         }
 
         function getDisplayedFanData() {
-            const activeTodayOverride = todayRecommendationOverrides[getDateKey()] ||
-                todayRecommendationOverrides["*"];
+            const activeTodayOverride = todayRecommendationOverrides[getDateKey()];
             const autoTodayIndex = activeTodayOverride
                 ? activeTodayOverride.memberIndex
                 : state.today
@@ -3891,3 +3890,4 @@
     </script>
 </body>
 </html>
+
