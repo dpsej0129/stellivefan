@@ -2338,31 +2338,48 @@
             const dateKey = getDateKey();
             const override = todayRecommendationOverrides[dateKey] ||
                 todayRecommendationOverrides["*"];
-            const overrideChanged = override &&
-                (!state.today ||
-                    state.today.dateKey !== dateKey ||
-                    state.today.songId !== override.songId);
 
-            if (!state.today || state.today.dateKey !== dateKey || overrideChanged) {
+            if (override) {
+                const selected = todayOverrideVideos.find(
+                    (video) => video.id === override.songId
+                );
+                const changed =
+                    !state.today ||
+                    state.today.dateKey !== dateKey ||
+                    state.today.songId !== override.songId ||
+                    state.today.memberIndex !== override.memberIndex ||
+                    state.card.todayMemberIndex !== override.memberIndex;
+
+                state.today = {
+                    dateKey,
+                    songId: override.songId,
+                    memberIndex: override.memberIndex
+                };
+                state.card.todayMemberIndex = override.memberIndex;
+
+                if (changed) saveState();
+
+                return {
+                    ...state.today,
+                    song: selected || songs[0]
+                };
+            }
+
+            if (!state.today || state.today.dateKey !== dateKey) {
                 const random = seededRandom(dateKey);
-                const selected = override
-                    ? todayOverrideVideos.find((video) => video.id === override.songId)
-                    : randomPick(songs, 1, random)[0];
+                const selected = randomPick(songs, 1, random)[0];
 
                 state.today = {
                     dateKey,
                     songId: selected.id,
-                    memberIndex: override ? override.memberIndex : selected.memberIndex
+                    memberIndex: selected.memberIndex
                 };
                 saveState();
             }
 
             return {
                 ...state.today,
-                song:
-                    songs.find((song) => song.id === state.today.songId) ||
-                    todayOverrideVideos.find((video) => video.id === state.today.songId) ||
-                    songs[0]
+                song: songs.find((song) => song.id === state.today.songId) || songs[0]
             };
         }
 
@@ -2385,7 +2402,7 @@
                 <img class="member-avatar" src="${memberAvatars[today.memberIndex]}" alt="${members[today.memberIndex]}">
                 <div>
                     <b>오늘의 멤버 · ${members[today.memberIndex]}</b>
-                    <small class="muted">날짜 키 기반 추천</small>
+                    <small class="muted">지정된 오늘의 추천</small>
                 </div>
             `;
 
@@ -3694,7 +3711,13 @@
         }
 
         function getDisplayedFanData() {
-            const autoTodayIndex = state.today ? state.today.memberIndex : undefined;
+            const activeTodayOverride = todayRecommendationOverrides[getDateKey()] ||
+                todayRecommendationOverrides["*"];
+            const autoTodayIndex = activeTodayOverride
+                ? activeTodayOverride.memberIndex
+                : state.today
+                    ? state.today.memberIndex
+                    : undefined;
 
             return {
                 name: getCardValue("name", "FAN #STEL"),
