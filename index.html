@@ -2038,6 +2038,14 @@
             localStorage.setItem(storageKey, JSON.stringify(state));
         }
 
+        function refreshHubIfActive() {
+            const hub = $("#hub");
+
+            if (hub && hub.classList.contains("is-active")) {
+                renderFanHub();
+            }
+        }
+
         function randomPick(items, count = 1, random = Math.random) {
             const pool = [...items];
             const result = [];
@@ -2102,6 +2110,7 @@
                 title: members[memberIndex] + " 최신 영상"
             });
             saveState();
+            refreshHubIfActive();
             window.open(memberVideoPages[memberIndex], "_blank", "noopener");
         }
 
@@ -2131,6 +2140,7 @@
                 title: song ? song.title : catalogVideo ? catalogVideo.title : "YouTube 영상"
             });
             saveState();
+            refreshHubIfActive();
 
             window.open(
                 "https://www.youtube.com/watch?v=" + videoId,
@@ -2544,6 +2554,7 @@
                 title: members[memberIndex] + " 치지직"
             });
             saveState();
+            refreshHubIfActive();
             window.open(memberCatalogData[memberIndex].chzzk, "_blank", "noopener");
         }
 
