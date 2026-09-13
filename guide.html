@@ -467,6 +467,10 @@
             line-height: 1.6;
         }
 
+        .random-member .button + .button {
+            margin-top: 9px;
+        }
+
         .recommendation-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -828,11 +832,17 @@
                         <a class="button" id="randomChzzkLink" target="_blank" rel="noopener">
                             치지직 채널 열기
                         </a>
+                        <button class="button" id="saveRandomMember" type="button">
+                            💜 팬 허브에 보관
+                        </button>
                     </article>
 
                     <div>
                         <div class="recommendation-grid" id="randomRecommendationGrid"></div>
                         <p class="data-note" id="randomDataNote"></p>
+                        <button class="button" id="saveRandomImage" type="button">
+                            🖼️ 추천 결과 이미지 저장
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1276,6 +1286,116 @@
             return nextIndex;
         }
 
+
+        function updateMainAppFromRandom(memberIndex, addToLibrary) {
+            const key = "stellive-fan-space";
+            let appState;
+
+            try {
+                appState = JSON.parse(localStorage.getItem(key) || "{}");
+            } catch (error) {
+                appState = {};
+            }
+
+            appState.discoveredMembers = Array.isArray(appState.discoveredMembers)
+                ? appState.discoveredMembers
+                : [];
+
+            if (!appState.discoveredMembers.includes(memberIndex)) {
+                appState.discoveredMembers.push(memberIndex);
+            }
+
+            if (addToLibrary) {
+                appState.library = appState.library || {
+                    members: [],
+                    songs: [],
+                    videos: []
+                };
+                appState.library.members = Array.isArray(appState.library.members)
+                    ? appState.library.members
+                    : [];
+
+                if (!appState.library.members.includes(memberIndex)) {
+                    appState.library.members.push(memberIndex);
+                }
+            }
+
+            localStorage.setItem(key, JSON.stringify(appState));
+        }
+
+        function saveRandomRecommendationImage() {
+            if (lastRandomMemberIndex < 0) {
+                alert("먼저 랜덤 멤버를 추천받아 주세요.");
+                return;
+            }
+
+            const member = members[lastRandomMemberIndex];
+            const recommendation = memberRecommendations[lastRandomMemberIndex];
+            const canvas = document.createElement("canvas");
+            canvas.width = 1200;
+            canvas.height = 675;
+            const context = canvas.getContext("2d");
+            const gradient = context.createLinearGradient(0, 0, 1200, 675);
+
+            gradient.addColorStop(0, "#070a1d");
+            gradient.addColorStop(0.55, "#251a55");
+            gradient.addColorStop(1, "#174e63");
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "rgba(255,255,255,0.06)";
+            for (let index = 0; index < 50; index += 1) {
+                context.beginPath();
+                context.arc(
+                    (index * 197) % canvas.width,
+                    (index * 109) % canvas.height,
+                    index % 3 + 1,
+                    0,
+                    Math.PI * 2
+                );
+                context.fill();
+            }
+
+            context.fillStyle = "#78d6ff";
+            context.font = "800 25px Pretendard, sans-serif";
+            context.fillText("STELLIVE RANDOM MEMBER", 100, 105);
+
+            context.fillStyle = "#ffffff";
+            context.font = "900 62px Pretendard, sans-serif";
+            context.fillText(member.name, 100, 200);
+
+            context.fillStyle = "#c5cbea";
+            context.font = "500 25px Pretendard, sans-serif";
+            context.fillText(member.description, 100, 250);
+
+            const rows = [
+                ["🏆 인기 일반 영상", recommendation.video.title],
+                ["🎵 인기 노래", recommendation.song.title],
+                ["📊 확인 당시 조회수", recommendation.video.views + " · " + recommendation.song.views],
+                ["📅 확인 기준", recommendationCheckedAt]
+            ];
+
+            rows.forEach(([label, value], index) => {
+                const y = 345 + index * 68;
+                context.fillStyle = "#a99fff";
+                context.font = "800 22px Pretendard, sans-serif";
+                context.fillText(label, 100, y);
+                context.fillStyle = "#ffffff";
+                context.font = "700 24px Pretendard, sans-serif";
+                context.fillText(value.slice(0, 44), 380, y);
+            });
+
+            canvas.toBlob((blob) => {
+                if (!blob) return;
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "stellive-random-" + lastRandomMemberIndex + ".png";
+                link.click();
+                window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+            }, "image/png");
+        }
+
         function renderRandomRecommendation() {
             const index = pickRandomMemberIndex();
             const member = members[index];
@@ -1288,7 +1408,13 @@
             $("#randomMemberName").textContent = member.name;
             $("#randomMemberDescription").textContent = member.description;
             $("#randomChzzkLink").href = recommendation.chzzk;
+            $("#saveRandomMember").textContent = "💜 팬 허브에 보관";
+            $("#saveRandomMember").onclick = () => {
+                updateMainAppFromRandom(index, true);
+                $("#saveRandomMember").textContent = "✓ 팬 허브에 보관됨";
+            };
 
+            updateMainAppFromRandom(index, false);
             grid.innerHTML = "";
             grid.append(
                 createRecommendationMedia(
@@ -1315,6 +1441,10 @@
         $("#randomMemberButton").addEventListener(
             "click",
             renderRandomRecommendation
+        );
+        $("#saveRandomImage").addEventListener(
+            "click",
+            saveRandomRecommendationImage
         );
 
         /* =========================================================
